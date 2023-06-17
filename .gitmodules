@@ -1,0 +1,6 @@
+[submodule "tools"]
+	path = tools
+	url = https://e.coding.net/axk/ai-m6xsdkzujian/tools.git
+[submodule "toolchain"]
+	path = toolchain
+	url = https://e.coding.net/axk/ai-m6xsdkzujian/toolchain.git
