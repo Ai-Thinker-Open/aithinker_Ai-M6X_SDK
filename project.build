@@ -22,7 +22,8 @@ endif
 
 # The command to remove a file.
 RM = $(CMAKE) -E remove_directory
-
+CHIP:=bl616
+BOARD:=bl616dk
 CPU_ID ?=
 CONFIG_USB_HS ?=y
 CONFIG_ROMAPI ?=y
@@ -47,7 +48,7 @@ cmake_definition+= -DCONFIG_TLSF=$(CONFIG_TLSF)
 
 build:Makefile
 	$(CMAKE) -S . -B build -G $(cmake_generator) $(cmake_definition)
-	cd build && make -j8 && make combine
+	cd build && make -j16 && make combine
 
 ninja:Makefile
 	$(CMAKE) -S . -B build -G Ninja $(cmake_definition)
