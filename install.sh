@@ -5,7 +5,7 @@ if [ -d "$FILE" ]; then
 else
     git submodule init
     git submodule update
-    cd toolchanin/bin
+    cd toolchain/bin
     export PATH=$PATH:$PWD
     cd ../..
 fi
