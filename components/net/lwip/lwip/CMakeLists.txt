@@ -52,7 +52,5 @@ sdk_library_add_sources(system/os/sys_arch.c)
 sdk_add_include_directories(system)
 sdk_add_include_directories(src/include)
 sdk_add_include_directories(src/include/lwip/apps)
-sdk_add_include_directories(src/include/lwip/priv)
-sdk_add_include_directories(src/include/lwip/prot)
-sdk_add_include_directories(src/include/lwip)
+
 sdk_add_include_directories(src/include/compat/posix)
