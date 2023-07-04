@@ -20,9 +20,9 @@
 #ifndef __BFLB_MM_MEM_H
 #define __BFLB_MM_MEM_H
 
-/****************************************************************************
- * Included Files
- ****************************************************************************/
+ /****************************************************************************
+  * Included Files
+  ****************************************************************************/
 
 #include <stdint.h>
 #include <stddef.h>
@@ -30,9 +30,9 @@
 #include <string.h>
 #include <bflb_irq.h>
 
-/****************************************************************************
- * Pre-processor Definitions
- ****************************************************************************/
+  /****************************************************************************
+   * Pre-processor Definitions
+   ****************************************************************************/
 
 #define MEM_ASSERT(x)                              \
     {                                              \
@@ -55,13 +55,13 @@
 #define PMEM_HEAP &g_memheap
 #endif
 
-/****************************************************************************
- * Public Types
- ****************************************************************************/
+   /****************************************************************************
+    * Public Types
+    ****************************************************************************/
 
 struct mem_heap_impl_s; /* Forward reference */
 struct mem_heap_s {
-    struct mem_heap_impl_s *mem_impl;
+    struct mem_heap_impl_s* mem_impl;
 };
 
 struct meminfo {
@@ -89,32 +89,32 @@ extern "C" {
 #endif
 
 EXTERN struct mem_heap_s g_memheap;
-
+EXTERN struct mem_heap_s g_pmemheap;
 /****************************************************************************
  * Public Function Prototypes
  ****************************************************************************/
 
-void kmem_init(void *heapstart, size_t heapsize);
-void *kmalloc(size_t size);
-void kfree(void *addr);
+void kmem_init(void* heapstart, size_t heapsize);
+void* kmalloc(size_t size);
+void kfree(void* addr);
 
-void pmem_init(void *heapstart, size_t heapsize);
+void pmem_init(void* heapstart, size_t heapsize);
 
 /* private api for mm*/
 
-void bflb_mem_init(struct mem_heap_s *heap, void *heapstart, size_t heapsize);
+void bflb_mem_init(struct mem_heap_s* heap, void* heapstart, size_t heapsize);
 
-void *bflb_malloc(struct mem_heap_s *heap, size_t nbytes);
+void* bflb_malloc(struct mem_heap_s* heap, size_t nbytes);
 
-void bflb_free(struct mem_heap_s *heap, void *ptr);
+void bflb_free(struct mem_heap_s* heap, void* ptr);
 
-void *bflb_realloc(struct mem_heap_s *heap, void *ptr, size_t nbytes);
+void* bflb_realloc(struct mem_heap_s* heap, void* ptr, size_t nbytes);
 
-void *bflb_calloc(struct mem_heap_s *heap, size_t count, size_t size);
+void* bflb_calloc(struct mem_heap_s* heap, size_t count, size_t size);
 
-void *bflb_malloc_align(struct mem_heap_s *heap, size_t align, size_t size);
+void* bflb_malloc_align(struct mem_heap_s* heap, size_t align, size_t size);
 
-void bflb_mem_usage(struct mem_heap_s *heap, struct meminfo *info);
+void bflb_mem_usage(struct mem_heap_s* heap, struct meminfo* info);
 
 #undef EXTERN
 #ifdef __cplusplus
