@@ -16,6 +16,8 @@
 
   mipi dbi interface
     LCD_DBI_ILI9488
+    LCD_DBI_ILI9341
+    LCD_DBI_NT35510
 
   mipi dpi (RGB) interface
     LCD_DPI_ILI9488
@@ -30,8 +32,9 @@
     LCD_SPI_ILI9341
     LCD_SPI_ST7796
     LCD_SPI_ST7789V
+    LCD_SPI_GC9A01
 */
-#define LCD_DBI_ILI9488
+#define LCD_SPI_GC9A01
 
 /* dbi ili9488 config */
 #if defined LCD_DBI_ILI9488
@@ -51,7 +54,7 @@
         1: rgb565 (16-bit, output rgb565)
         2: nrgb8888 (32-bit, output rgb888)
     */
-    #define ILI9488_DBI_PIXEL_FORMAT 1
+    #define ILI9488_DBI_PIXEL_FORMAT 2
 
     /* ILI9488 LCD width and height */
     #define ILI9488_DBI_W 320
@@ -100,6 +103,40 @@
         1: enable
     */
    #define ILI9341_DBI_COLOR_REVERSAL 0
+
+   /* dbi ili9341 config */
+#elif defined LCD_DBI_NT35510
+
+    /* Selecting interface type, more configuration of peripherals comes later
+        1: DBI peripheral, supported functions: typeB-x8(8080); (support chips: bl616, bl606p, bl808),
+    */
+    #define LCD_DBI_INTERFACE_TYPE 1
+
+    /* enable the lcd reset function
+        0: Does not care about lcd hard reset
+        1: use gpio to reset the lcd
+    */
+    #define LCD_RESET_EN 1
+
+    /* Selecting pixel format
+        1: rgb565 (16-bit, output rgb565)
+        2: nrgb8888 (32-bit, output rgb888)
+    */
+    #define NT35510_DBI_PIXEL_FORMAT 2
+
+    /* NT35510 LCD width and height */
+    #define NT35510_DBI_W 480
+    #define NT35510_DBI_H 800
+
+    /* The offset of the area can be displayed */
+    #define NT35510_DBI_OFFSET_X 0
+    #define NT35510_DBI_OFFSET_Y 0
+
+    /* Color reversal, Some screens are required
+        0: disable
+        1: enable
+    */
+   #define NT35510_DBI_COLOR_REVERSAL 0
 
 #endif
 
@@ -344,6 +381,41 @@
         1: enable
     */
    #define ST7796_SPI_COLOR_REVERSAL 0
+
+
+/* spi gc9a01 config */
+#elif defined LCD_SPI_GC9A01
+
+    /* Selecting interface type, more configuration of peripherals comes later
+        1: SPI peripheral, supported functions: spi-4wire,
+    */
+    #define LCD_SPI_INTERFACE_TYPE 1
+
+    /* Selecting pixel format
+        1: rgb565
+    */
+    #define GC9A01_SPI_PIXEL_FORMAT 1
+
+    /* enable the lcd reset function
+        0: Does not care about lcd hard reset
+        1: use gpio to reset the lcd
+    */
+    #define LCD_RESET_EN 1
+
+    /* LCD width and height */
+    #define GC9A01_SPI_W 240
+    #define GC9A01_SPI_H 240
+
+    /* The offset of the area can be displayed */
+    #define GC9A01_SPI_OFFSET_X 0
+    #define GC9A01_SPI_OFFSET_Y 0
+
+    /* Color reversal, Some screens are required
+        0: disable
+        1: enable
+    */
+   #define GC9A01_SPI_COLOR_REVERSAL 0
+
 
 #endif
 

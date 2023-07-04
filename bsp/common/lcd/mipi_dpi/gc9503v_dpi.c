@@ -26,8 +26,6 @@
 #if defined(LCD_DPI_GC9503V)
 
 #include "gc9503v_dpi.h"
-#include "bl_mipi_dpi_pec.h"
-
 #include "bflb_mtimer.h"
 #include "bflb_gpio.h"
 
