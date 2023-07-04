@@ -16,10 +16,11 @@
     TOUCH_I2C_FT6X36
     TOUCH_I2C_GT911
     TOUCH_I2C_CHSC6540
+    TOUCH_I2C_CST816D
 */
 
 /* Select Touch Type */
-#define TOUCH_I2C_CHSC6540
+#define TOUCH_I2C_CST816D
 
 /* touch interface */
 #define TOUCH_INTERFACE_SPI 1

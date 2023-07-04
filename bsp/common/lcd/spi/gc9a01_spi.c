@@ -1,5 +1,5 @@
 /**
- * @file st7796_spi.c
+ * @file gc9a01_spi.c
  * @brief
  *
  * Copyright (c) 2021 Bouffalolab team
@@ -23,7 +23,7 @@
 
 #include "../lcd.h"
 
-#if defined(LCD_SPI_ST7796)
+#if defined(LCD_SPI_GC9A01)
 
 #if (LCD_SPI_INTERFACE_TYPE == 1)
 #include "bl_spi_hard_4.h"
@@ -42,9 +42,9 @@
 
 static lcd_spi_hard_4_init_t spi_para = {
     .clock_freq = 40 * 1000 * 1000,
-#if (ST7796_SPI_PIXEL_FORMAT == 1)
+#if (GC9A01_SPI_PIXEL_FORMAT == 1)
     .pixel_format = LCD_SPI_LCD_PIXEL_FORMAT_RGB565,
-#elif (ST7796_SPI_PIXEL_FORMAT == 2)
+#elif (GC9A01_SPI_PIXEL_FORMAT == 2)
     .pixel_format = LCD_SPI_LCD_PIXEL_FORMAT_NRGB8888,
 #endif
 };
@@ -54,7 +54,7 @@ static lcd_spi_hard_4_init_t spi_para = {
 #error "Configuration error"
 
 #endif
-const st7796_spi_init_cmd_t st7796_spi_init_cmds[] = {
+const gc9a01_spi_init_cmd_t gc9a01_spi_init_cmds[] = {
 
     { 0xFE, NULL, 0 },
     { 0xEF, NULL, 0 },
@@ -109,7 +109,7 @@ const st7796_spi_init_cmd_t st7796_spi_init_cmds[] = {
     { 0x35, "\x00", 1 },
     { 0x21, NULL, 0 },
     { 0xFF, NULL, 120 },
-    
+
     { 0x11, NULL, 0 },
     { 0xFF, NULL, 120 },
     { 0x29, NULL, 0 },
@@ -120,51 +120,52 @@ const st7796_spi_init_cmd_t st7796_spi_init_cmds[] = {
 };
 
 /**
- * @brief st7796_spi_async_callback_enable
+ * @brief gc9a01_spi_async_callback_enable
  *
  * @return
  */
-void st7796_spi_async_callback_enable(bool enable)
+void gc9a01_spi_async_callback_enable(bool enable)
 {
     lcd_spi_sync_callback_enable(enable);
 }
 
 /**
- * @brief st7796_spi_async_callback_register
+ * @brief gc9a01_spi_async_callback_register
  *
  * @return
  */
-void st7796_spi_async_callback_register(void (*callback)(void))
+void gc9a01_spi_async_callback_register(void (*callback)(void))
 {
     lcd_spi_async_callback_register(callback);
 }
 
 /**
- * @brief st7796_spi_draw_is_busy, After the call st7796_spi_draw_picture_dma must check this,
- *         if st7796_spi_draw_is_busy() == 1, Don't allow other draw !!
+ * @brief gc9a01_spi_draw_is_busy, After the call gc9a01_spi_draw_picture_dma must check this,
+ *         if gc9a01_spi_draw_is_busy() == 1, Don't allow other draw !!
  *         can run in the DMA interrupt callback function.
  *
  * @return int 0:draw end; 1:Being draw
  */
-int st7796_spi_draw_is_busy(void)
+int gc9a01_spi_draw_is_busy(void)
 {
     return lcd_spi_isbusy();
 }
 
 /**
- * @brief st7796_spi_init
+ * @brief gc9a01_spi_init
  *
  * @return int
  */
-int st7796_spi_init()
+int gc9a01_spi_init()
 {
     lcd_spi_init(&spi_para);
 
-    for (uint16_t i = 0; i < (sizeof(st7796_spi_init_cmds) / sizeof(st7796_spi_init_cmds[0])); i++) {
-        if (st7796_spi_init_cmds[i].cmd == 0xFF && st7796_spi_init_cmds[i].data == NULL && st7796_spi_init_cmds[i].databytes) {
-            bflb_mtimer_delay_ms(st7796_spi_init_cmds[i].databytes);
-        } else {
-            lcd_spi_transmit_cmd_para(st7796_spi_init_cmds[i].cmd, (void *)(st7796_spi_init_cmds[i].data), st7796_spi_init_cmds[i].databytes);
+    for (uint16_t i = 0; i < (sizeof(gc9a01_spi_init_cmds) / sizeof(gc9a01_spi_init_cmds[0])); i++) {
+        if (gc9a01_spi_init_cmds[i].cmd == 0xFF && gc9a01_spi_init_cmds[i].data == NULL && gc9a01_spi_init_cmds[i].databytes) {
+            bflb_mtimer_delay_ms(gc9a01_spi_init_cmds[i].databytes);
+        }
+        else {
+            lcd_spi_transmit_cmd_para(gc9a01_spi_init_cmds[i].cmd, (void*)(gc9a01_spi_init_cmds[i].data), gc9a01_spi_init_cmds[i].databytes);
         }
     }
 
@@ -177,7 +178,7 @@ int st7796_spi_init()
  * @param dir
  * @param mir_flag
  */
-int st7796_spi_set_dir(uint8_t dir, uint8_t mir_flag)
+int gc9a01_spi_set_dir(uint8_t dir, uint8_t mir_flag)
 {
     uint8_t param;
 
@@ -212,28 +213,28 @@ int st7796_spi_set_dir(uint8_t dir, uint8_t mir_flag)
             break;
     }
 
-    lcd_spi_transmit_cmd_para(0x36, (void *)&param, 1);
+    lcd_spi_transmit_cmd_para(0x36, (void*)&param, 1);
 
     return dir;
 }
 
 /**
- * @brief st7796_spi_set_draw_window
+ * @brief gc9a01_spi_set_draw_window
  *
  * @param x1
  * @param y1
  * @param x2
  * @param y2
  */
-void st7796_spi_set_draw_window(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
+void gc9a01_spi_set_draw_window(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
 {
-#if ST7796_SPI_OFFSET_X
-    x1 += ST7796_SPI_OFFSET_X;
-    x2 += ST7796_SPI_OFFSET_X;
+#if GC9A01_SPI_OFFSET_X
+    x1 += GC9A01_SPI_OFFSET_X;
+    x2 += GC9A01_SPI_OFFSET_X;
 #endif
-#if ST7796_SPI_OFFSET_Y
-    y1 += ST7796_SPI_OFFSET_Y;
-    y2 += ST7796_SPI_OFFSET_Y;
+#if GC9A01_SPI_OFFSET_Y
+    y1 += GC9A01_SPI_OFFSET_Y;
+    y2 += GC9A01_SPI_OFFSET_Y;
 #endif
 
     int8_t param[4];
@@ -243,33 +244,33 @@ void st7796_spi_set_draw_window(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t 
     param[2] = (x2 >> 8) & 0xFF;
     param[3] = x2 & 0xFF;
 
-    lcd_spi_transmit_cmd_para(0x2A, (void *)param, 4);
+    lcd_spi_transmit_cmd_para(0x2A, (void*)param, 4);
 
     param[0] = (y1 >> 8) & 0xFF;
     param[1] = y1 & 0xFF;
     param[2] = (y2 >> 8) & 0xFF;
     param[3] = y2 & 0xFF;
 
-    lcd_spi_transmit_cmd_para(0x2B, (void *)param, 4);
+    lcd_spi_transmit_cmd_para(0x2B, (void*)param, 4);
 }
 
 /**
- * @brief st7796_spi_draw_point
+ * @brief gc9a01_spi_draw_point
  *
  * @param x
  * @param y
  * @param color
  */
-void st7796_spi_draw_point(uint16_t x, uint16_t y, st7796_spi_color_t color)
+void gc9a01_spi_draw_point(uint16_t x, uint16_t y, gc9a01_spi_color_t color)
 {
     /* set window */
-    st7796_spi_set_draw_window(x, y, x, y);
+    gc9a01_spi_set_draw_window(x, y, x, y);
 
-    lcd_spi_transmit_cmd_pixel_sync(0x2C, (void *)&color, 1);
+    lcd_spi_transmit_cmd_pixel_sync(0x2C, (void*)&color, 1);
 }
 
 /**
- * @brief st7796_draw_area
+ * @brief gc9a01_draw_area
  *
  * @param x1
  * @param y1
@@ -277,19 +278,19 @@ void st7796_spi_draw_point(uint16_t x, uint16_t y, st7796_spi_color_t color)
  * @param y2
  * @param color
  */
-void st7796_spi_draw_area(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, st7796_spi_color_t color)
+void gc9a01_spi_draw_area(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, gc9a01_spi_color_t color)
 {
     uint32_t pixel_cnt = (x2 - x1 + 1) * (y2 - y1 + 1);
 
     /* set window */
-    st7796_spi_set_draw_window(x1, y1, x2, y2);
+    gc9a01_spi_set_draw_window(x1, y1, x2, y2);
 
     lcd_spi_transmit_cmd_pixel_fill_sync(0x2C, (uint32_t)color, pixel_cnt);
 }
 
 /**
- * @brief st7796_draw_picture_dma, Non-blocking! Using DMA acceleration, Not waiting for the draw end
- *  After the call, No other operations are allowed until (st7796_draw_is_busy()==0)
+ * @brief gc9a01_draw_picture_dma, Non-blocking! Using DMA acceleration, Not waiting for the draw end
+ *  After the call, No other operations are allowed until (gc9a01_draw_is_busy()==0)
  *
  * @param x1
  * @param y1
@@ -297,18 +298,18 @@ void st7796_spi_draw_area(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, st
  * @param y2
  * @param picture
  */
-void st7796_spi_draw_picture_nonblocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, st7796_spi_color_t *picture)
+void gc9a01_spi_draw_picture_nonblocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, gc9a01_spi_color_t* picture)
 {
     size_t pixel_cnt = (x2 - x1 + 1) * (y2 - y1 + 1);
 
     /* set window */
-    st7796_spi_set_draw_window(x1, y1, x2, y2);
+    gc9a01_spi_set_draw_window(x1, y1, x2, y2);
 
-    lcd_spi_transmit_cmd_pixel_async(0x2C, (void *)picture, pixel_cnt);
+    lcd_spi_transmit_cmd_pixel_async(0x2C, (void*)picture, pixel_cnt);
 }
 
 /**
- * @brief st7796_draw_picture,Blocking,Using DMA acceleration,Waiting for the draw end
+ * @brief gc9a01_draw_picture,Blocking,Using DMA acceleration,Waiting for the draw end
  *
  * @param x1
  * @param y1
@@ -316,14 +317,14 @@ void st7796_spi_draw_picture_nonblocking(uint16_t x1, uint16_t y1, uint16_t x2, 
  * @param y2
  * @param picture
  */
-void st7796_spi_draw_picture_blocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, st7796_spi_color_t *picture)
+void gc9a01_spi_draw_picture_blocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, gc9a01_spi_color_t* picture)
 {
     size_t pixel_cnt = (x2 - x1 + 1) * (y2 - y1 + 1);
 
     /* set window */
-    st7796_spi_set_draw_window(x1, y1, x2, y2);
+    gc9a01_spi_set_draw_window(x1, y1, x2, y2);
 
-    lcd_spi_transmit_cmd_pixel_sync(0x2C, (void *)picture, pixel_cnt);
+    lcd_spi_transmit_cmd_pixel_sync(0x2C, (void*)picture, pixel_cnt);
 }
 
 #endif
