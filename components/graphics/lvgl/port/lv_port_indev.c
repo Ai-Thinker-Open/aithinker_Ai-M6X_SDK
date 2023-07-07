@@ -103,7 +103,7 @@ void lv_port_indev_init(void)
 
 #if 1
     lv_obj_t *touchpad_cursor = lv_img_create(lv_scr_act());
-    lv_img_set_src(touchpad_cursor, LV_SYMBOL_EDIT);
+    // lv_img_set_src(touchpad_cursor, LV_SYMBOL_EDIT);
     lv_obj_clear_flag(touchpad_cursor, LV_OBJ_FLAG_CLICKABLE);
     lv_indev_set_cursor(indev_touchpad, touchpad_cursor);
 #endif
@@ -195,6 +195,7 @@ void lv_port_indev_init(void)
  * Touchpad
  * -----------------*/
 #include "touch.h"
+uint8_t no_touch = 0;
 
 /*Initialize your touchpad*/
 static void touchpad_init(void)
@@ -215,7 +216,10 @@ static void touchpad_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
     uint8_t point_num = 0;
     touch_coord_t touch_coord;
 
-    touch_read(&point_num, &touch_coord, 1);
+    // touch_read(&point_num, &touch_coord, 1);
+    if(touch_read(&point_num, &touch_coord, 1) == 0){
+        no_touch = 0;
+    }
 
     /*Save the pressed coordinates and the state*/
     if (point_num) {
