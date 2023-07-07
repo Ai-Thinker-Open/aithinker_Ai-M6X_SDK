@@ -71,7 +71,7 @@ typedef struct
 #error "Please select a touch type"
 #endif
 
-int touch_init(touch_coord_t *max_value);
-int touch_read(uint8_t *point_num, touch_coord_t *touch_coord, uint8_t max_num);
+int touch_init(touch_coord_t* max_value);
+int touch_read(uint8_t* point_num, touch_coord_t* touch_coord, uint8_t max_num);
 
 #endif

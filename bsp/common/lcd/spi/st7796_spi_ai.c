@@ -23,7 +23,7 @@
 
 #include "../lcd.h"
 
-#if defined(LCD_SPI_ST7796)
+#if defined(LCD_SPI_ST7796_Ai)
 
 #if (LCD_SPI_INTERFACE_TYPE == 1)
 #include "bl_spi_hard_4.h"
@@ -54,7 +54,7 @@ static lcd_spi_hard_4_init_t spi_para = {
 #error "Configuration error"
 
 #endif
-const st7796_spi_init_cmd_t st7796_spi_init_cmds[] = {
+const st7796_spi_init_cmd_t ai_st7796_spi_init_cmds[] = {
     { 0x01, NULL, 0 },
     { 0xFF, NULL, 10 },
     { 0x11, NULL, 0 }, /* Exit sleep */
@@ -69,20 +69,20 @@ const st7796_spi_init_cmd_t st7796_spi_init_cmds[] = {
     { 0xE6, "\x0F\xF2\x3F\x4F\x4F\x28\x0E\x00", 8 },
     { 0xC5, "\x2A", 1 },
 
-/* Color reversal */
-#if ST7796_SPI_COLOR_REVERSAL
-    { 0xB4, "\x01", 1 },
-    { 0x21, NULL, 0 },
-#endif
+    /* Color reversal */
+    #if ST7796_SPI_COLOR_REVERSAL
+        { 0xB4, "\x01", 1 },
+        { 0x21, NULL, 0 },
+    #endif
 
-    { 0xE0, "\xF0\x03\x0A\x11\x14\x1C\x3B\x55\x4A\x0A\x13\x14\x1C\x1F", 14 }, /* Set Gamma */
-    { 0XE1, "\xF0\x03\x0A\x0C\x0C\x09\x36\x54\x49\x0F\x1B\x18\x1B\x1F", 14 }, /* Set Gamma */
+        { 0xE0, "\xF0\x03\x0A\x11\x14\x1C\x3B\x55\x4A\x0A\x13\x14\x1C\x1F", 14 }, /* Set Gamma */
+        { 0XE1, "\xF0\x03\x0A\x0C\x0C\x09\x36\x54\x49\x0F\x1B\x18\x1B\x1F", 14 }, /* Set Gamma */
 
-    { 0xF0, "\x3C", 1 },
-    { 0xF0, "\x69", 1 },
+        { 0xF0, "\x3C", 1 },
+        { 0xF0, "\x69", 1 },
 
-    { 0x29, NULL, 0 }, /* Display on */
-    { 0xFF, NULL, 10 },
+        { 0x29, NULL, 0 }, /* Display on */
+        { 0xFF, NULL, 10 },
 };
 
 /**
@@ -90,7 +90,7 @@ const st7796_spi_init_cmd_t st7796_spi_init_cmds[] = {
  *
  * @return
  */
-void st7796_spi_async_callback_enable(bool enable)
+void  ai_st7796_spi_async_callback_enable(bool enable)
 {
     lcd_spi_sync_callback_enable(enable);
 }
@@ -100,7 +100,7 @@ void st7796_spi_async_callback_enable(bool enable)
  *
  * @return
  */
-void st7796_spi_async_callback_register(void (*callback)(void))
+void  ai_st7796_spi_async_callback_register(void (*callback)(void))
 {
     lcd_spi_async_callback_register(callback);
 }
@@ -112,7 +112,7 @@ void st7796_spi_async_callback_register(void (*callback)(void))
  *
  * @return int 0:draw end; 1:Being draw
  */
-int st7796_spi_draw_is_busy(void)
+int  ai_st7796_spi_draw_is_busy(void)
 {
     return lcd_spi_isbusy();
 }
@@ -122,15 +122,16 @@ int st7796_spi_draw_is_busy(void)
  *
  * @return int
  */
-int st7796_spi_init()
+int  ai_st7796_spi_init()
 {
     lcd_spi_init(&spi_para);
 
-    for (uint16_t i = 0; i < (sizeof(st7796_spi_init_cmds) / sizeof(st7796_spi_init_cmds[0])); i++) {
-        if (st7796_spi_init_cmds[i].cmd == 0xFF && st7796_spi_init_cmds[i].data == NULL && st7796_spi_init_cmds[i].databytes) {
-            bflb_mtimer_delay_ms(st7796_spi_init_cmds[i].databytes);
-        } else {
-            lcd_spi_transmit_cmd_para(st7796_spi_init_cmds[i].cmd, (void *)(st7796_spi_init_cmds[i].data), st7796_spi_init_cmds[i].databytes);
+    for (uint16_t i = 0; i < (sizeof(ai_st7796_spi_init_cmds) / sizeof(ai_st7796_spi_init_cmds[0])); i++) {
+        if (ai_st7796_spi_init_cmds[i].cmd == 0xFF &&  ai_st7796_spi_init_cmds[i].data == NULL &&  ai_st7796_spi_init_cmds[i].databytes) {
+            bflb_mtimer_delay_ms(ai_st7796_spi_init_cmds[i].databytes);
+        }
+        else {
+            lcd_spi_transmit_cmd_para(ai_st7796_spi_init_cmds[i].cmd, (void*)(ai_st7796_spi_init_cmds[i].data), ai_st7796_spi_init_cmds[i].databytes);
         }
     }
 
@@ -143,7 +144,7 @@ int st7796_spi_init()
  * @param dir
  * @param mir_flag
  */
-int st7796_spi_set_dir(uint8_t dir, uint8_t mir_flag)
+int  ai_st7796_spi_set_dir(uint8_t dir, uint8_t mir_flag)
 {
     uint8_t param;
 
@@ -178,7 +179,7 @@ int st7796_spi_set_dir(uint8_t dir, uint8_t mir_flag)
             break;
     }
 
-    lcd_spi_transmit_cmd_para(0x36, (void *)&param, 1);
+    lcd_spi_transmit_cmd_para(0x36, (void*)&param, 1);
 
     return dir;
 }
@@ -191,7 +192,7 @@ int st7796_spi_set_dir(uint8_t dir, uint8_t mir_flag)
  * @param x2
  * @param y2
  */
-void st7796_spi_set_draw_window(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
+void  ai_st7796_spi_set_draw_window(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
 {
 #if ST7796_SPI_OFFSET_X
     x1 += ST7796_SPI_OFFSET_X;
@@ -209,14 +210,14 @@ void st7796_spi_set_draw_window(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t 
     param[2] = (x2 >> 8) & 0xFF;
     param[3] = x2 & 0xFF;
 
-    lcd_spi_transmit_cmd_para(0x2A, (void *)param, 4);
+    lcd_spi_transmit_cmd_para(0x2A, (void*)param, 4);
 
     param[0] = (y1 >> 8) & 0xFF;
     param[1] = y1 & 0xFF;
     param[2] = (y2 >> 8) & 0xFF;
     param[3] = y2 & 0xFF;
 
-    lcd_spi_transmit_cmd_para(0x2B, (void *)param, 4);
+    lcd_spi_transmit_cmd_para(0x2B, (void*)param, 4);
 }
 
 /**
@@ -226,12 +227,12 @@ void st7796_spi_set_draw_window(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t 
  * @param y
  * @param color
  */
-void st7796_spi_draw_point(uint16_t x, uint16_t y, st7796_spi_color_t color)
+void  ai_st7796_spi_draw_point(uint16_t x, uint16_t y, st7796_spi_color_t color)
 {
     /* set window */
-    st7796_spi_set_draw_window(x, y, x, y);
+    ai_st7796_spi_set_draw_window(x, y, x, y);
 
-    lcd_spi_transmit_cmd_pixel_sync(0x2C, (void *)&color, 1);
+    lcd_spi_transmit_cmd_pixel_sync(0x2C, (void*)&color, 1);
 }
 
 /**
@@ -243,12 +244,12 @@ void st7796_spi_draw_point(uint16_t x, uint16_t y, st7796_spi_color_t color)
  * @param y2
  * @param color
  */
-void st7796_spi_draw_area(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, st7796_spi_color_t color)
+void  ai_st7796_spi_draw_area(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, st7796_spi_color_t color)
 {
     uint32_t pixel_cnt = (x2 - x1 + 1) * (y2 - y1 + 1);
 
     /* set window */
-    st7796_spi_set_draw_window(x1, y1, x2, y2);
+    ai_st7796_spi_set_draw_window(x1, y1, x2, y2);
 
     lcd_spi_transmit_cmd_pixel_fill_sync(0x2C, (uint32_t)color, pixel_cnt);
 }
@@ -263,14 +264,14 @@ void st7796_spi_draw_area(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, st
  * @param y2
  * @param picture
  */
-void st7796_spi_draw_picture_nonblocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, st7796_spi_color_t *picture)
+void  ai_st7796_spi_draw_picture_nonblocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, st7796_spi_color_t* picture)
 {
     size_t pixel_cnt = (x2 - x1 + 1) * (y2 - y1 + 1);
 
     /* set window */
-    st7796_spi_set_draw_window(x1, y1, x2, y2);
+    ai_st7796_spi_set_draw_window(x1, y1, x2, y2);
 
-    lcd_spi_transmit_cmd_pixel_async(0x2C, (void *)picture, pixel_cnt);
+    lcd_spi_transmit_cmd_pixel_async(0x2C, (void*)picture, pixel_cnt);
 }
 
 /**
@@ -282,14 +283,14 @@ void st7796_spi_draw_picture_nonblocking(uint16_t x1, uint16_t y1, uint16_t x2, 
  * @param y2
  * @param picture
  */
-void st7796_spi_draw_picture_blocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, st7796_spi_color_t *picture)
+void  ai_st7796_spi_draw_picture_blocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, st7796_spi_color_t* picture)
 {
     size_t pixel_cnt = (x2 - x1 + 1) * (y2 - y1 + 1);
 
     /* set window */
-    st7796_spi_set_draw_window(x1, y1, x2, y2);
+    ai_st7796_spi_set_draw_window(x1, y1, x2, y2);
 
-    lcd_spi_transmit_cmd_pixel_sync(0x2C, (void *)picture, pixel_cnt);
+    lcd_spi_transmit_cmd_pixel_sync(0x2C, (void*)picture, pixel_cnt);
 }
 
 #endif

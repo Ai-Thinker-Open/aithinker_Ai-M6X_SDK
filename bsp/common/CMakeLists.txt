@@ -35,13 +35,13 @@ if(CONFIG_BSP_LCD)
     target_sources(app PRIVATE lcd/spi/ili9341_spi.c)
     target_sources(app PRIVATE lcd/spi/ili9488_spi.c)
     target_sources(app PRIVATE lcd/spi/st7796_spi.c)
+    target_sources(app PRIVATE lcd/spi/st7796_spi_ai.c)
     target_sources(app PRIVATE lcd/spi/st7789v_spi.c)
     target_sources(app PRIVATE lcd/spi/gc9a01_spi.c)
 
     target_sources(app PRIVATE lcd/mipi_dpi/standard_dpi.c)
     target_sources(app PRIVATE lcd/mipi_dpi/ili9488_dpi.c)
     target_sources(app PRIVATE lcd/mipi_dpi/gc9503v_dpi.c)
-
     sdk_add_include_directories(lcd)
 endif()
 

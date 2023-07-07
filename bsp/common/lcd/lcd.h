@@ -28,7 +28,7 @@
 #include "bflb_core.h"
 #include "lcd_conf.h"
 
-/* Do not modify the following */
+ /* Do not modify the following */
 
 #define LCD_INTERFACE_SPI       1
 #define LCD_INTERFACE_DBI       2
@@ -143,6 +143,15 @@
 #define LCD_COLOR_DEPTH              ST7796_SPI_COLOR_DEPTH
 #define _LCD_FUNC_DEFINE(_func, ...) st7796_spi_##_func(__VA_ARGS__)
 
+#elif defined LCD_SPI_ST7796_Ai
+
+#include "spi/st7796_spi_ai.h"
+#define LCD_INTERFACE_TYPE           LCD_INTERFACE_SPI
+#define LCD_W                        ST7796_SPI_W
+#define LCD_H                        ST7796_SPI_H
+#define LCD_COLOR_DEPTH              ST7796_SPI_COLOR_DEPTH
+#define _LCD_FUNC_DEFINE(_func, ...)  ai_st7796_spi_##_func(__VA_ARGS__)
+
 #elif defined LCD_SPI_ST7789V
 
 #include "spi/st7789v_spi.h"
@@ -189,14 +198,14 @@ int lcd_set_dir(uint8_t dir, uint8_t mir_flag);
 int lcd_draw_point(uint16_t x, uint16_t y, lcd_color_t color);
 int lcd_draw_area(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t color);
 int lcd_clear(lcd_color_t color);
-int lcd_draw_picture_blocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t *picture);
-int lcd_draw_picture_nonblocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t *picture);
+int lcd_draw_picture_blocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t* picture);
+int lcd_draw_picture_nonblocking(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t* picture);
 int lcd_draw_is_busy(void);
 int lcd_draw_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t color);
 int lcd_draw_rectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t color);
 int lcd_draw_circle(uint16_t x, uint16_t y, uint16_t r, lcd_color_t color);
 #if FONT_ASCII_16X8
-int lcd_draw_str_ascii16(uint16_t x, uint16_t y, lcd_color_t color, lcd_color_t bk_color, uint8_t *str, uint8_t num);
+int lcd_draw_str_ascii16(uint16_t x, uint16_t y, lcd_color_t color, lcd_color_t bk_color, uint8_t* str, uint8_t num);
 #endif
 
 /* RGB LCD Common interface */
@@ -206,20 +215,20 @@ int lcd_draw_str_ascii16(uint16_t x, uint16_t y, lcd_color_t color, lcd_color_t 
 #define FRAME_INT_TYPE_CYCLE 0
 #define FRAME_INT_TYPE_SWAP  1
 
-int lcd_init(lcd_color_t *screen_buffer);
-int lcd_screen_switch(lcd_color_t *screen_buffer);
-lcd_color_t *lcd_get_screen_using(void);
+int lcd_init(lcd_color_t* screen_buffer);
+int lcd_screen_switch(lcd_color_t* screen_buffer);
+lcd_color_t* lcd_get_screen_using(void);
 int lcd_frame_callback_register(uint32_t callback_type, void (*callback)(void));
 
-int lcd_clear(lcd_color_t *screen_buffer, lcd_color_t color);
-int lcd_draw_point(lcd_color_t *screen_buffer, uint16_t x, uint16_t y, lcd_color_t color);
-int lcd_draw_area(lcd_color_t *screen_buffer, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t color);
-int lcd_draw_picture(lcd_color_t *screen_buffer, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t *picture);
-int lcd_draw_line(lcd_color_t *screen_buffer, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t color);
-int lcd_draw_rectangle(lcd_color_t *screen_buffer, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t color);
-int lcd_draw_circle(lcd_color_t *screen_buffer, uint16_t x, uint16_t y, uint16_t r, lcd_color_t color);
+int lcd_clear(lcd_color_t* screen_buffer, lcd_color_t color);
+int lcd_draw_point(lcd_color_t* screen_buffer, uint16_t x, uint16_t y, lcd_color_t color);
+int lcd_draw_area(lcd_color_t* screen_buffer, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t color);
+int lcd_draw_picture(lcd_color_t* screen_buffer, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t* picture);
+int lcd_draw_line(lcd_color_t* screen_buffer, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t color);
+int lcd_draw_rectangle(lcd_color_t* screen_buffer, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, lcd_color_t color);
+int lcd_draw_circle(lcd_color_t* screen_buffer, uint16_t x, uint16_t y, uint16_t r, lcd_color_t color);
 #if FONT_ASCII_16X8
-int lcd_draw_str_ascii16(lcd_color_t *screen_buffer, uint16_t x, uint16_t y, lcd_color_t color, lcd_color_t bk_color, uint8_t *str, uint8_t num);
+int lcd_draw_str_ascii16(lcd_color_t* screen_buffer, uint16_t x, uint16_t y, lcd_color_t color, lcd_color_t bk_color, uint8_t* str, uint8_t num);
 #endif
 
 #endif
