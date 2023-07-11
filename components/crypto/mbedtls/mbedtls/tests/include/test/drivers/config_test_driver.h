@@ -39,7 +39,6 @@
 #define MBEDTLS_PSA_BUILTIN_ALG_SHA_256 1
 #define MBEDTLS_CTR_DRBG_C
 #define MBEDTLS_ENTROPY_C
-#define MBEDTLS_POLY1305_C
 
 /*
  * Configuration options that may need to be additionally enabled for the

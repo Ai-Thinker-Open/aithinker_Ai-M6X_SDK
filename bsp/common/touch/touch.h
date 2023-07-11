@@ -54,9 +54,6 @@ typedef struct
 #define TOUCH_MAX_POINT                GT911_I2C_MAX_POINT
 #define _TOUCH_FUNC_DEFINE(_func, ...) gt911_i2c_##_func(__VA_ARGS__)
 
-<<<<<<< HEAD
-#elif
-=======
 #elif defined TOUCH_I2C_CHSC6540
 
 #include "CHSC6540_i2c.h"
@@ -71,7 +68,6 @@ typedef struct
 #define TOUCH_MAX_POINT                CST816D_MAX_TOUCH_POINT
 #define _TOUCH_FUNC_DEFINE(_func, ...) cst816d_i2c_##_func(__VA_ARGS__)
 #else
->>>>>>> release/AiPi_Eyes_SDK
 #error "Please select a touch type"
 #endif
 

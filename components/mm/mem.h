@@ -88,29 +88,17 @@ extern "C" {
 #define EXTERN extern
 #endif
 
-<<<<<<< HEAD
-EXTERN struct mem_heap_s g_kmemheap;
-EXTERN struct mem_heap_s g_pmemheap;
-
-=======
 EXTERN struct mem_heap_s g_memheap;
 EXTERN struct mem_heap_s g_pmemheap;
->>>>>>> release/AiPi_Eyes_SDK
+EXTERN struct mem_heap_s g_kmemheap;
 /****************************************************************************
  * Public Function Prototypes
  ****************************************************************************/
 
-<<<<<<< HEAD
-void kmem_init(void *heapstart, size_t heapsize);
-void *kmalloc(size_t size);
-void *kcalloc(size_t size, size_t len);
-void kfree(void *addr);
-uint32_t kfree_size(void);
-=======
 void kmem_init(void* heapstart, size_t heapsize);
 void* kmalloc(size_t size);
+void* kcalloc(size_t size, size_t len);
 void kfree(void* addr);
->>>>>>> release/AiPi_Eyes_SDK
 
 void pmem_init(void* heapstart, size_t heapsize);
 

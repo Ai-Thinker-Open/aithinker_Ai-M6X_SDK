@@ -6,10 +6,11 @@ sdk_add_compile_definitions_ifdef(CONFIG_LWIP_LP -DCONFIG_LWIP_LP)
 
 sdk_library_add_sources(src/apps/lwiperf/lwiperf.c)
 sdk_library_add_sources(src/apps/http/fs.c)
+sdk_library_add_sources(src/apps/sntp/sntp.c)
+
 # sdk_library_add_sources(src/apps/http/fsdata_custom.c)
 # sdk_library_add_sources(src/apps/http/fsdata.c)
 # sdk_library_add_sources(src/apps/http/httpd.c)
-
 sdk_library_add_sources(src/api/api_lib.c)
 sdk_library_add_sources(src/api/api_msg.c)
 sdk_library_add_sources(src/api/err.c)
@@ -51,5 +52,5 @@ sdk_library_add_sources(system/os/sys_arch.c)
 
 sdk_add_include_directories(system)
 sdk_add_include_directories(src/include)
+sdk_add_include_directories(src/include/lwip/apps)
 sdk_add_include_directories(src/include/compat/posix)
-

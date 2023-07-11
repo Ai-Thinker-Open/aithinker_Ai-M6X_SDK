@@ -1,4 +1,4 @@
-PSA Cryptography API implementation and PSA driver interface
+PSA Cryptograpy API implementation and PSA driver interface
 ===========================================================
 
 ## Introduction

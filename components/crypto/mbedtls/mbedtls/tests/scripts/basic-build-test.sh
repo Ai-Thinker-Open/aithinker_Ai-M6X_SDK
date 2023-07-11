@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# basic-build-test.sh
+# basic-build-tests.sh
 #
 # Copyright The Mbed TLS Contributors
 # SPDX-License-Identifier: Apache-2.0
@@ -36,7 +36,7 @@
 #
 # This script has been written to be generic and should work on any shell.
 #
-# Usage: basic-build-test.sh
+# Usage: basic-build-tests.sh
 #
 
 # Abort on errors (and uninitiliased variables)

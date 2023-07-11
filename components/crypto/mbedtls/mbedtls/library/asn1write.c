@@ -26,7 +26,13 @@
 
 #include <string.h>
 
+#if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
+#else
+#include <stdlib.h>
+#define mbedtls_calloc    calloc
+#define mbedtls_free       free
+#endif
 
 int mbedtls_asn1_write_len( unsigned char **p, unsigned char *start, size_t len )
 {
@@ -72,11 +78,9 @@ int mbedtls_asn1_write_len( unsigned char **p, unsigned char *start, size_t len 
         return( 4 );
     }
 
-    int len_is_valid = 1;
 #if SIZE_MAX > 0xFFFFFFFF
-    len_is_valid = ( len <= 0xFFFFFFFF );
+    if( len <= 0xFFFFFFFF )
 #endif
-    if( len_is_valid )
     {
         if( *p - start < 5 )
             return( MBEDTLS_ERR_ASN1_BUF_TOO_SMALL );
@@ -89,7 +93,9 @@ int mbedtls_asn1_write_len( unsigned char **p, unsigned char *start, size_t len 
         return( 5 );
     }
 
+#if SIZE_MAX > 0xFFFFFFFF
     return( MBEDTLS_ERR_ASN1_INVALID_LENGTH );
+#endif
 }
 
 int mbedtls_asn1_write_tag( unsigned char **p, unsigned char *start, unsigned char tag )

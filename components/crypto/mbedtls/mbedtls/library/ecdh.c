@@ -77,12 +77,10 @@ static int ecdh_gen_public_restartable( mbedtls_ecp_group *grp,
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
 
-    int restarting = 0;
-#if defined(MBEDTLS_ECP_RESTARTABLE)
-    restarting = ( rs_ctx != NULL && rs_ctx->rsm != NULL );
-#endif
     /* If multiplication is in progress, we already generated a privkey */
-    if( !restarting )
+#if defined(MBEDTLS_ECP_RESTARTABLE)
+    if( rs_ctx == NULL || rs_ctx->rsm == NULL )
+#endif
         MBEDTLS_MPI_CHK( mbedtls_ecp_gen_privkey( grp, d, f_rng, p_rng ) );
 
     MBEDTLS_MPI_CHK( mbedtls_ecp_mul_restartable( grp, Q, d, &grp->G,

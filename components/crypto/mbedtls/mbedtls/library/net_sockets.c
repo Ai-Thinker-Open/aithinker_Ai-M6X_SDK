@@ -37,7 +37,11 @@
 #error "This module only works on Unix and Windows, see MBEDTLS_NET_C in config.h"
 #endif
 
+#if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
+#else
+#include <stdlib.h>
+#endif
 
 #include "mbedtls/net_sockets.h"
 #include "mbedtls/error.h"

@@ -590,7 +590,6 @@ int execute_tests( int argc , const char ** argv )
              */
             test_files = &argv[ arg_index ];
             testfile_count = argc - arg_index;
-            break;
         }
 
         arg_index++;

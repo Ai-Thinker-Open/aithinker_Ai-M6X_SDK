@@ -10,7 +10,10 @@
 
 /* configure the CPU type */
 OUTPUT_ARCH( "riscv" )
-
+/* link with the standard c library */
+INPUT(-lc)
+/* link with the standard GCC library */
+INPUT(-lgcc)
 /* configure the entry point */
 ENTRY(__start)
 
@@ -28,7 +31,7 @@ MEMORY
 {
     fw_header_memory  (rx)  : ORIGIN = 0xA0000000 - 0x1000, LENGTH = 4K
     xip_memory  (rx)  : ORIGIN = 0xA0000000, LENGTH = 4M
-    ram_psram  (wxa)   : ORIGIN = 0xA8000000, LENGTH = 4M
+    ram_code  (wxa)   : ORIGIN = 0xA8000000, LENGTH = 4M
     itcm_memory (rx)  : ORIGIN = 0x62FC0000, LENGTH = 20K
     dtcm_memory (rx)  : ORIGIN = 0x62FC5000, LENGTH = 4K
     nocache_ram_memory (!rx) : ORIGIN = 0x22FC6000, LENGTH = 44K+60K
@@ -48,6 +51,7 @@ SECTIONS
 
     .init :
     {
+        *(.text.entry)
         KEEP (*(SORT_NONE(.init)))
         KEEP (*(SORT_NONE(.vector)))
 
@@ -207,21 +211,7 @@ SECTIONS
         __ram_data_end__ = .;
     } > ram_memory
 
-
-    __psram_load_addr = (__ram_load_addr + SIZEOF (RAM_DATA));
-
-    .psram_data_region : AT (__psram_load_addr)
-    {
-        . = ALIGN(4);
-        __psram_data_start__ = .;
-
-        KEEP(*(.psram_data*))
-
-        . = ALIGN(4);
-        __psram_data_end__ = .;
-    } > ram_psram
-
-    __etext_final = (__psram_load_addr + SIZEOF (.psram_data_region));
+    __etext_final = (__ram_load_addr + SIZEOF (RAM_DATA));
     ASSERT(__etext_final <= ORIGIN(xip_memory) + LENGTH(xip_memory), "code memory overflow")
 
     .bss (NOLOAD) :
@@ -265,6 +255,8 @@ SECTIONS
         . = ALIGN(4);
         __HeapBase = .;
 
+        /*__end__ = .;*/
+        /*end = __end__;*/
         KEEP(*(.heap*))
 
         . = ALIGN(4);
@@ -274,17 +266,20 @@ SECTIONS
     __HeapLimit = ORIGIN(ram_memory) + LENGTH(ram_memory);
     ASSERT(__HeapLimit - __HeapBase >= HeapMinSize, "heap region overflow")
 
-    .psram_noinit_data (NOLOAD):
+    .psmram_data (NOLOAD):
     {
         . = ALIGN(4);
-        __psram_noinit_data_start__ = .;
+        __psram_data_start__ = .;
 
+        /*__end__ = .;*/
+        /*end = __end__;*/
+        KEEP(*(.psram_data*))
         KEEP(*(.psram_noinit*))
         KEEP(*(.img_buf*))
 
         . = ALIGN(4);
-        __psram_noinit_data_end__ = .;
-    } > ram_psram
+        __psram_data_end__ = .;
+    } > ram_code
 
     .psram_heap (NOLOAD):
     {
@@ -293,9 +288,9 @@ SECTIONS
         KEEP(*(.psram_heap*))
         . = ALIGN(4);
         __psram_heap_end = .;
-    } > ram_psram
+    } > ram_code
 
-    __psram_limit = ORIGIN(ram_psram) + LENGTH(ram_psram);
+    __psram_limit = ORIGIN(ram_code) + LENGTH(ram_code);
     ASSERT(__psram_limit - __psram_heap_base >= psram_min_size, "psram heap region overflow")
  
     .wifibss (NOLOAD) :

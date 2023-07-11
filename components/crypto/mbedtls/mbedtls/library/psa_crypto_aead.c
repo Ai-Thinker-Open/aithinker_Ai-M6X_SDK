@@ -24,7 +24,6 @@
 
 #include "psa_crypto_aead.h"
 #include "psa_crypto_core.h"
-#include "psa_crypto_cipher.h"
 
 #include "mbedtls/ccm.h"
 #include "mbedtls/chachapoly.h"
