@@ -699,6 +699,49 @@ BL_Err_Type ATTR_CLOCK_SECTION PDS_Trim_RC32M(void)
 
     return ERROR;
 }
+/****************************************************************************/ /**
+ * @brief  PDS Power Off PD_WB
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type PDS_Power_Off_WB(void)
+{
+    uint32_t tmpVal = 0;
+
+    tmpVal = BL_RD_REG(PDS_BASE, PDS_CTL2);
+    tmpVal = BL_SET_REG_BIT(tmpVal, PDS_CR_PDS_FORCE_WB_ISO_EN);
+    BL_WR_REG(PDS_BASE, PDS_USB_CTL, tmpVal);
+
+    tmpVal = BL_SET_REG_BIT(tmpVal, PDS_CR_PDS_FORCE_NP_PWR_OFF);
+    BL_WR_REG(PDS_BASE, PDS_USB_CTL, tmpVal);
+
+    return SUCCESS;
+}
+
+/****************************************************************************/ /**
+ * @brief  PDS Power On PD_WB
+ *
+ * @param  None
+ *
+ * @return SUCCESS or ERROR
+ *
+*******************************************************************************/
+BL_Err_Type PDS_Power_On_WB(void)
+{
+    uint32_t tmpVal = 0;
+
+    tmpVal = BL_RD_REG(PDS_BASE, PDS_CTL2);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, PDS_CR_PDS_FORCE_NP_PWR_OFF);
+    BL_WR_REG(PDS_BASE, PDS_USB_CTL, tmpVal);
+
+    tmpVal = BL_CLR_REG_BIT(tmpVal, PDS_CR_PDS_FORCE_WB_ISO_EN);
+    BL_WR_REG(PDS_BASE, PDS_USB_CTL, tmpVal);
+
+    return SUCCESS;
+}
 
 /****************************************************************************/ /**
  * @brief  PDS turn on USB
@@ -793,6 +836,14 @@ BL_Err_Type PDS_Turn_Off_USB(void)
     tmpVal = BL_RD_REG(PDS_BASE, PDS_USB_PHY_CTRL);
     tmpVal = BL_CLR_REG_BIT(tmpVal, PDS_REG_USB_PHY_PONRST);
     BL_WR_REG(PDS_BASE, PDS_USB_PHY_CTRL, tmpVal);
+
+    tmpVal = BL_RD_REG(PDS_BASE, PDS_USB_CTL);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, PDS_REG_USB_SW_RST_N);
+    BL_WR_REG(PDS_BASE, PDS_USB_CTL, tmpVal);
+
+    tmpVal = BL_RD_REG(PDS_BASE, PDS_USB_CTL);
+    tmpVal = BL_CLR_REG_BIT(tmpVal, PDS_REG_USB_EXT_SUSP_N);
+    BL_WR_REG(PDS_BASE, PDS_USB_CTL, tmpVal);
 
     return SUCCESS;
 }

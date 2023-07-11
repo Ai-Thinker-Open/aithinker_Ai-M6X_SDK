@@ -43,6 +43,10 @@
 #include "bl616_ef_cfg.h"
 #include "bl616_common.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /** @addtogroup  BL616_Peripheral_Driver
  *  @{
  */
@@ -104,11 +108,17 @@ BL_Err_Type AON_Trim_DcdcVoutTrim(void);
 BL_Err_Type AON_Trim_Ldo11socVoutTrim(void);
 BL_Err_Type AON_Trim_Usb20RcalCode(void);
 /*----------*/
+BL_Err_Type AON_Output_Pulldown_DCDC18(void);
+BL_Err_Type AON_Output_Float_DCDC18(void);
 
 /*@} end of group AON_Public_Functions */
 
 /*@} end of group AON */
 
 /*@} end of group BL616_Peripheral_Driver */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __BL616_AON_H__ */

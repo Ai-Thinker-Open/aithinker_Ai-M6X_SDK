@@ -146,6 +146,7 @@
 #ifndef BFLOG_COLOR_TRACE
 #define BFLOG_COLOR_TRACE BFLOG_COLOR_FG_WHITE BFLOG_COLOR_BG_NONE BFLOG_SGR_FAINT
 #endif
+
 /**
  * @}
  */
@@ -392,7 +393,7 @@ struct _bflog_msg {
         };
     };
 
-    uint32_t time; /*!< rtc timestamp */
+    uint32_t time;    /*!< rtc timestamp */
     union {
         uint64_t clk; /*!< cpu clock tick */
         struct

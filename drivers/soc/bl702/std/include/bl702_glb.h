@@ -48,6 +48,10 @@
 #include "bflb_sf_ctrl.h"
 #include "bflb_sf_cfg.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /** @addtogroup  BL702_Peripheral_Driver
  *  @{
  */
@@ -749,8 +753,8 @@ BL_Err_Type GLB_Set_SPI_0_ACT_MOD_Sel(GLB_SPI_PAD_ACT_AS_Type mod);
 BL_Err_Type GLB_Select_Internal_Flash(void);
 BL_Err_Type GLB_Select_External_Flash(void);
 BL_Err_Type GLB_Deswap_Flash_Pin(void);
-BL_Err_Type GLB_Swap_Flash_CS_IO2_Pin();
-BL_Err_Type GLB_Swap_Flash_IO0_IO3_Pin();
+BL_Err_Type GLB_Swap_Flash_CS_IO2_Pin(void);
+BL_Err_Type GLB_Swap_Flash_IO0_IO3_Pin(void);
 BL_Err_Type GLB_Swap_Flash_Pin(void);
 BL_Err_Type GLB_Select_Internal_PSram(void);
 /*----------*/
@@ -818,5 +822,9 @@ BL_Err_Type GLB_GPIO_INT0_Callback_Install2(GLB_GPIO_Type gpioPin, intCallback_T
 /*@} end of group GLB */
 
 /*@} end of group BL702_Peripheral_Driver */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __BL702_GLB_H__ */

@@ -1,4 +1,5 @@
 #include "bflb_l1c.h"
+#include "bflb_core.h"
 
 #if (defined(BL616) || defined(BL606P) || defined(BL808) || defined(BL628)) && !defined(CPU_LP)
 #include "csi_core.h"
@@ -115,6 +116,12 @@ ATTR_TCM_SECTION void bflb_l1c_dcache_invalidate_range(void *addr, uint32_t size
 #endif
 }
 
+ATTR_TCM_SECTION void bflb_l1c_dcache_clean_invalidate_range(void *addr, uint32_t size)
+{
+#if defined(BL702) || defined(BL702L)
+    L1C_Cache_Flush();
+#endif
+}
 #if defined(BL702) || defined(BL702L)
 /****************************************************************************/ /**
  * @brief  L1C cache write set
@@ -134,24 +141,24 @@ void ATTR_TCM_SECTION bflb_l1c_cache_write_set(uint8_t wt_en, uint8_t wb_en, uin
     regval = getreg32(0x40009000 + 0x0);
 
     if (wt_en) {
-        regval |= (1<<4);
+        regval |= (1 << 4);
     } else {
-        regval &= ~(1<<4);
+        regval &= ~(1 << 4);
     }
 
     if (wb_en) {
-        regval |= (1<<5);
+        regval |= (1 << 5);
     } else {
-        regval &= ~(1<<5);
+        regval &= ~(1 << 5);
     }
 
     if (wa_en) {
-        regval |= (1<<6);
+        regval |= (1 << 6);
     } else {
-        regval &= ~(1<<6);
+        regval &= ~(1 << 6);
     }
 
-    putreg32(regval, 0x40009000+0x0);
+    putreg32(regval, 0x40009000 + 0x0);
 }
 #endif
 

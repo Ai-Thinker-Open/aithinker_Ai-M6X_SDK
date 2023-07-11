@@ -4,6 +4,12 @@
 #include "rv_hart.h"
 #include "rv_pmp.h"
 
+/* sf_ctrl_2 */
+#define SF_CTRL_2_OFFSET       (0x70)
+#define SF_CTRL_SF_IF_BK2_MODE (1 << 29U)
+#define SF_CTRL_SF_IF_BK2_EN   (1 << 30U)
+
+#ifndef CONFIG_PSRAM_COPY_CODE
 static void Tzc_Sec_PSRAMB_Access_Set_Not_Lock(uint8_t region, uint32_t startAddr, uint32_t endAddr, uint8_t group)
 {
     uint32_t tmpVal = 0;
@@ -22,6 +28,7 @@ static void Tzc_Sec_PSRAMB_Access_Set_Not_Lock(uint8_t region, uint32_t startAdd
     //tmpVal |= 1<<(region+24);
     BL_WR_REG(TZC_SEC_BASE, TZC_SEC_TZC_PSRAMB_TZSRG_CTRL, tmpVal);
 }
+
 static void Tzc_Sec_ROM_Access_Set_Not_Lock(uint8_t region, uint32_t startAddr, uint32_t length, uint8_t group)
 {
     uint32_t tmpVal = 0;
@@ -44,6 +51,8 @@ static void Tzc_Sec_ROM_Access_Set_Not_Lock(uint8_t region, uint32_t startAddr, 
     // tmpVal |= 1 << (region + 24);
     BL_WR_REG(TZC_SEC_BASE, TZC_SEC_TZC_ROM_TZSRG_CTRL, tmpVal);
 }
+
+#if 0
 static void pmp_init(void)
 {
     const pmp_config_entry_t pmp_entry_tab[6] = {
@@ -86,16 +95,31 @@ static void pmp_init(void)
     };
     rvpmp_init(pmp_entry_tab, sizeof(pmp_entry_tab) / sizeof(pmp_config_entry_t));
 }
+#endif
+#endif
+
+static void flash_bank2_access_init(void)
+{
+    uint32_t reg_base = 0;
+    uint32_t regval = 0;
+    reg_base = BFLB_SF_CTRL_BASE;
+    regval = getreg32(reg_base + SF_CTRL_2_OFFSET);
+    regval |= SF_CTRL_SF_IF_BK2_EN;
+    regval |= SF_CTRL_SF_IF_BK2_MODE;
+    putreg32(regval, reg_base + SF_CTRL_2_OFFSET);
+}
 
 void SystemInit(void)
 {
     uint32_t i = 0;
 
+#ifndef CONFIG_PSRAM_COPY_CODE
     /* CPU Prefetching barrier */
     Tzc_Sec_PSRAMB_Access_Set_Not_Lock(0, 0x0, 64 * 1024 * 1024, 0);
     Tzc_Sec_ROM_Access_Set_Not_Lock(1, 0x90020000, ((256 * 1024 * 1024) - (128 * 1024)), 0);
-    pmp_init();
-
+    flash_bank2_access_init();
+    //pmp_init();
+#endif
     /* enable mstatus FS */
     uint32_t mstatus = __get_MSTATUS();
     mstatus |= (1 << 13);
@@ -115,13 +139,20 @@ void SystemInit(void)
     for (i = 0; i < IRQn_LAST; i++) {
         CLIC->CLICINT[i].IE = 0;
         CLIC->CLICINT[i].IP = 0;
+#ifdef CONFIG_IRQ_USE_VECTOR
         CLIC->CLICINT[i].ATTR = 1; /* use vector interrupt */
+#else
+        CLIC->CLICINT[i].ATTR = 0; /* use no vector interrupt */
+#endif
     }
 
     /* tspend interrupt will be clear auto*/
     /* tspend use positive interrupt */
+#ifdef CONFIG_IRQ_USE_VECTOR
     CLIC->CLICINT[MSOFT_IRQn].ATTR = 0x3;
-
+#else
+    CLIC->CLICINT[MSOFT_IRQn].ATTR = 0x2;
+#endif
     csi_dcache_enable();
     csi_icache_enable();
 
@@ -132,6 +163,11 @@ void SystemInit(void)
 
     BL_WR_REG(GLB_BASE, GLB_UART_CFG1, 0xffffffff);
     BL_WR_REG(GLB_BASE, GLB_UART_CFG2, 0x0000ffff);
+
+    uint32_t tmpVal = 0;
+    tmpVal = BL_RD_REG(GLB_BASE, GLB_SRAM_CFG3);
+    tmpVal = BL_SET_REG_BITS_VAL(tmpVal, GLB_EM_SEL, 0x00);
+    BL_WR_REG(GLB_BASE, GLB_SRAM_CFG3, tmpVal);
 }
 
 void System_Post_Init(void)
@@ -142,6 +178,8 @@ void System_Post_Init(void)
     csi_icache_invalid();
 #endif
 
+#ifndef CONFIG_FREERTOS
     /* global IRQ enable */
     __enable_irq();
+#endif
 }

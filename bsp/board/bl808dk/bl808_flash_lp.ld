@@ -10,10 +10,7 @@
 
 /* configure the CPU type */
 OUTPUT_ARCH( "riscv" )
-/* link with the standard c library */
-INPUT(-lc)
-/* link with the standard GCC library */
-INPUT(-lgcc)
+
 /* configure the entry point */
 ENTRY(__start)
 
@@ -38,13 +35,17 @@ SECTIONS
         KEEP(*(.fw_header))
     } > fw_header_memory
 
+    .init :
+    {
+        KEEP (*(SORT_NONE(.init)))
+        KEEP (*(SORT_NONE(.vector)))
+
+    } > xip_memory
+
     .text :
     {
         . = ALIGN(4);
         __text_code_start__ = .;
-
-        KEEP (*(SORT_NONE(.init)))
-        KEEP (*(SORT_NONE(.vector)))
 
         *(.text)
         *(.text.*)

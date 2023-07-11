@@ -50,13 +50,13 @@
  */
 
 #if defined(BL602) || defined(BL702)
-#define BFLB_SF_CTRL_BUF_BASE    ((uint32_t)0x4000B700)
+#define BFLB_SF_CTRL_BUF_BASE ((uint32_t)0x4000B700)
 #elif defined(BL702L)
-#define BFLB_SF_CTRL_BUF_BASE    ((uint32_t)0x4000B600)
+#define BFLB_SF_CTRL_BUF_BASE ((uint32_t)0x4000B600)
 #elif defined(BL606P) || defined(BL808) || defined(BL616)
-#define BFLB_SF_CTRL_BUF_BASE    ((uint32_t)0x2000b600)
+#define BFLB_SF_CTRL_BUF_BASE ((uint32_t)0x2000b600)
 #elif defined(BL628)
-#define BFLB_SF_CTRL_BUF_BASE    ((uint32_t)0x20082600)
+#define BFLB_SF_CTRL_BUF_BASE ((uint32_t)0x20082600)
 #endif
 
 /*@} end of group SFLASH_Private_Macros */
@@ -105,10 +105,11 @@
  *
 *******************************************************************************/
 __WEAK
-#ifdef BFLB_SF_CTRL_SBUS2_ENABLE
+#if defined(BL628) || defined(BL616) || defined(BL808) || defined(BL606P)
 void ATTR_TCM_SECTION bflb_sflash_init(const struct sf_ctrl_cfg_type *p_sf_ctrl_cfg,
                                        const struct sf_ctrl_bank2_cfg *p_bank2_cfg)
 {
+#ifdef BFLB_SF_CTRL_SBUS2_ENABLE
     uint8_t clk_delay = 0;
     uint8_t rx_clk_invert = 0;
 
@@ -143,6 +144,7 @@ void ATTR_TCM_SECTION bflb_sflash_init(const struct sf_ctrl_cfg_type *p_sf_ctrl_
     } else {
         bflb_sf_ctrl_sbus2_revoke_replace();
     }
+#endif
 #else
 void ATTR_TCM_SECTION bflb_sflash_init(const struct sf_ctrl_cfg_type *p_sf_ctrl_cfg)
 {
@@ -182,7 +184,7 @@ int ATTR_TCM_SECTION bflb_sflash_set_spi_mode(uint8_t mode)
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_read_reg(spi_flash_cfg_type *flash_cfg, uint8_t reg_index,
-                                              uint8_t *reg_value, uint8_t reg_len)
+                                          uint8_t *reg_value, uint8_t reg_len)
 {
     uint8_t *const flash_ctrl_buf = (uint8_t *)BFLB_SF_CTRL_BUF_BASE;
     struct sf_ctrl_cmd_cfg_type flash_cmd;
@@ -226,7 +228,7 @@ int ATTR_TCM_SECTION bflb_sflash_read_reg(spi_flash_cfg_type *flash_cfg, uint8_t
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_write_reg(spi_flash_cfg_type *flash_cfg, uint8_t reg_index,
-                                               uint8_t *reg_value, uint8_t reg_len)
+                                           uint8_t *reg_value, uint8_t reg_len)
 {
     uint8_t *const flash_ctrl_buf = (uint8_t *)BFLB_SF_CTRL_BUF_BASE;
     uint32_t cnt = 0;
@@ -272,7 +274,7 @@ int ATTR_TCM_SECTION bflb_sflash_write_reg(spi_flash_cfg_type *flash_cfg, uint8_
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_read_reg_with_cmd(spi_flash_cfg_type *flash_cfg,
-                           uint8_t read_reg_cmd, uint8_t *reg_value, uint8_t reg_len)
+                                                   uint8_t read_reg_cmd, uint8_t *reg_value, uint8_t reg_len)
 {
     uint8_t *const flash_ctrl_buf = (uint8_t *)BFLB_SF_CTRL_BUF_BASE;
     struct sf_ctrl_cmd_cfg_type flash_cmd;
@@ -316,7 +318,7 @@ int ATTR_TCM_SECTION bflb_sflash_read_reg_with_cmd(spi_flash_cfg_type *flash_cfg
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_write_reg_with_cmd(spi_flash_cfg_type *flash_cfg,
-                           uint8_t write_reg_cmd, uint8_t *reg_value, uint8_t reg_len)
+                                                    uint8_t write_reg_cmd, uint8_t *reg_value, uint8_t reg_len)
 {
     uint8_t *const flash_ctrl_buf = (uint8_t *)BFLB_SF_CTRL_BUF_BASE;
     uint32_t cnt = 0;
@@ -950,12 +952,12 @@ void ATTR_TCM_SECTION bflb_sflash_get_deviceid(uint8_t *data, uint8_t is_32bits_
     flash_cmd.addr_size = 4;
 
     if (is_32bits_addr) {
-        flash_cmd.cmd_buf[0] = (cmd << 24) | (addr >> 8);
-        flash_cmd.cmd_buf[1] = (addr << 24) | (read_mode << 16);
+        flash_cmd.cmd_buf[0] = ((uint32_t)cmd << 24) | (addr >> 8);
+        flash_cmd.cmd_buf[1] = (addr << 24) | ((uint32_t)read_mode << 16);
         flash_cmd.addr_size++;
     } else {
-        flash_cmd.cmd_buf[0] = (cmd << 24) | (addr);
-        flash_cmd.cmd_buf[1] = (read_mode << 24);
+        flash_cmd.cmd_buf[0] = ((uint32_t)cmd << 24) | (addr);
+        flash_cmd.cmd_buf[1] = ((uint32_t)read_mode << 24);
     }
 
     flash_cmd.rw_flag = SF_CTRL_READ;
@@ -999,7 +1001,7 @@ void ATTR_TCM_SECTION bflb_sflash_powerdown(void)
     }
 
     cmd = 0xB9;
-    flash_cmd.cmd_buf[0] = (cmd << 24);
+    flash_cmd.cmd_buf[0] = ((uint32_t)cmd << 24);
     flash_cmd.rw_flag = SF_CTRL_WRITE;
 
     bflb_sf_ctrl_sendcmd(&flash_cmd);
@@ -1066,7 +1068,7 @@ void ATTR_TCM_SECTION bflb_sflash_release_powerdown(spi_flash_cfg_type *flash_cf
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_restore_from_powerdown(spi_flash_cfg_type *flash_cfg,
-                                                    uint8_t flash_cont_read, uint8_t bank)
+                                                        uint8_t flash_cont_read, uint8_t bank)
 {
     int stat = 0;
     uint32_t jedecid = 0;
@@ -1193,7 +1195,7 @@ void ATTR_TCM_SECTION bflb_sflash_disable_burst_wrap(spi_flash_cfg_type *flash_c
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_set_32bits_addr_mode(spi_flash_cfg_type *flash_cfg,
-                                                          uint8_t en_32bits_addr)
+                                                      uint8_t en_32bits_addr)
 {
     struct sf_ctrl_cmd_cfg_type flash_cmd;
     uint8_t cmd = 0;
@@ -1316,7 +1318,7 @@ void ATTR_TCM_SECTION bflb_sflash_reset_continue_read(spi_flash_cfg_type *flash_
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_set_xip_cfg(spi_flash_cfg_type *flash_cfg, uint8_t io_mode,
-                                     uint8_t cont_read, uint32_t addr, uint32_t len, uint8_t bank)
+                                             uint8_t cont_read, uint32_t addr, uint32_t len, uint8_t bank)
 {
     uint8_t cmd = 0, dummy_clks = 0;
     struct sf_ctrl_cmd_cfg_type flash_cmd;
@@ -1436,7 +1438,7 @@ int ATTR_TCM_SECTION bflb_sflash_set_xip_cfg(spi_flash_cfg_type *flash_cfg, uint
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_xip_read_enable(spi_flash_cfg_type *flash_cfg,
-                                    uint8_t io_mode, uint8_t cont_read, uint8_t bank)
+                                                 uint8_t io_mode, uint8_t cont_read, uint8_t bank)
 {
     int stat = 0;
 
@@ -1459,7 +1461,6 @@ int ATTR_TCM_SECTION bflb_sflash_xip_read_enable(spi_flash_cfg_type *flash_cfg,
 __WEAK
 void ATTR_TCM_SECTION bflb_sflash_xip_read_disable(void)
 {
-
 }
 
 /****************************************************************************/ /**
@@ -1475,7 +1476,7 @@ void ATTR_TCM_SECTION bflb_sflash_xip_read_disable(void)
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_rcv_enable(spi_flash_cfg_type *flash_cfg, uint8_t r_cmd,
-                                                uint8_t w_cmd, uint8_t bit_pos)
+                                            uint8_t w_cmd, uint8_t bit_pos)
 {
     int stat = 0;
     uint32_t cnt = 0;
@@ -1542,7 +1543,7 @@ int ATTR_TCM_SECTION bflb_sflash_rcv_enable(spi_flash_cfg_type *flash_cfg, uint8
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_erase_security_register(spi_flash_cfg_type *flash_cfg,
-                                                  struct sflash_sec_reg_cfg *p_sec_reg_cfg)
+                                                         struct sflash_sec_reg_cfg *p_sec_reg_cfg)
 {
     int stat = 0;
     uint32_t cnt = 0;
@@ -1639,7 +1640,7 @@ int ATTR_TCM_SECTION bflb_sflash_erase_security_register(spi_flash_cfg_type *fla
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_program_security_register(spi_flash_cfg_type *flash_cfg,
-                                                    struct sflash_sec_reg_cfg *p_sec_reg_cfg)
+                                                           struct sflash_sec_reg_cfg *p_sec_reg_cfg)
 {
     uint8_t *const flash_ctrl_buf = (uint8_t *)BFLB_SF_CTRL_BUF_BASE;
     uint32_t i = 0, cur_len = 0;
@@ -1873,7 +1874,7 @@ int ATTR_TCM_SECTION bflb_sflash_read_security_register(struct sflash_sec_reg_cf
     return 0;
 }
 
-/****************************************************************************//**
+/****************************************************************************/ /**
  * @brief  Clear flash status register
  *
  * @param  flash_cfg: Flash configuration pointer
@@ -1891,16 +1892,16 @@ int ATTR_TCM_SECTION bflb_sflash_clear_status_register(spi_flash_cfg_type *flash
     uint8_t read_reg_value0 = 0;
     uint8_t read_reg_value1 = 0;
 
-    if ((flash_cfg->io_mode&0xf)==SF_CTRL_QO_MODE || (flash_cfg->io_mode&0xf)==SF_CTRL_QIO_MODE) {
+    if ((flash_cfg->io_mode & 0xf) == SF_CTRL_QO_MODE || (flash_cfg->io_mode & 0xf) == SF_CTRL_QIO_MODE) {
         qe_value = 1;
     }
 
     bflb_sflash_read_reg(flash_cfg, 0, (uint8_t *)&read_reg_value0, 1);
     bflb_sflash_read_reg(flash_cfg, 1, (uint8_t *)&read_reg_value1, 1);
-    read_value = (read_reg_value0|(read_reg_value1<<8));
-    if ((read_value & (~((1<<(flash_cfg->qe_index*8+flash_cfg->qe_bit)) |
-                         (1<<(flash_cfg->busy_index*8+flash_cfg->busy_bit)) |
-                         (1<<(flash_cfg->wr_enable_index*8+flash_cfg->wr_enable_bit))))) == 0) {
+    read_value = (read_reg_value0 | (read_reg_value1 << 8));
+    if ((read_value & (~((1 << (flash_cfg->qe_index * 8 + flash_cfg->qe_bit)) |
+                         (1 << (flash_cfg->busy_index * 8 + flash_cfg->busy_bit)) |
+                         (1 << (flash_cfg->wr_enable_index * 8 + flash_cfg->wr_enable_bit))))) == 0) {
         return 0;
     }
 
@@ -1909,11 +1910,11 @@ int ATTR_TCM_SECTION bflb_sflash_clear_status_register(spi_flash_cfg_type *flash
         return ret;
     }
     if (flash_cfg->qe_write_reg_len == 2) {
-        reg_value = (qe_value<<(flash_cfg->qe_index*8+flash_cfg->qe_bit));
+        reg_value = (qe_value << (flash_cfg->qe_index * 8 + flash_cfg->qe_bit));
         bflb_sflash_write_reg(flash_cfg, 0, (uint8_t *)&reg_value, 2);
     } else {
         if (flash_cfg->qe_index == 0) {
-            reg_value = (qe_value<<flash_cfg->qe_bit);
+            reg_value = (qe_value << flash_cfg->qe_bit);
         } else {
             reg_value = 0;
         }
@@ -1923,7 +1924,7 @@ int ATTR_TCM_SECTION bflb_sflash_clear_status_register(spi_flash_cfg_type *flash
             return ret;
         }
         if (flash_cfg->qe_index == 1) {
-            reg_value = (qe_value<<flash_cfg->qe_bit);
+            reg_value = (qe_value << flash_cfg->qe_bit);
         } else {
             reg_value = 0;
         }
@@ -1947,7 +1948,7 @@ int ATTR_TCM_SECTION bflb_sflash_clear_status_register(spi_flash_cfg_type *flash
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_read(spi_flash_cfg_type *flash_cfg, uint8_t io_mode,
-                           uint8_t cont_read, uint32_t addr, uint8_t *data, uint32_t len)
+                                      uint8_t cont_read, uint32_t addr, uint8_t *data, uint32_t len)
 {
     uint8_t *const flash_ctrl_buf = (uint8_t *)BFLB_SF_CTRL_BUF_BASE;
     uint32_t cur_len = 0, i = 0;
@@ -2090,7 +2091,7 @@ int ATTR_TCM_SECTION bflb_sflash_read(spi_flash_cfg_type *flash_cfg, uint8_t io_
 *******************************************************************************/
 __WEAK
 int ATTR_TCM_SECTION bflb_sflash_program(spi_flash_cfg_type *flash_cfg, uint8_t io_mode,
-                                                 uint32_t addr, uint8_t *data, uint32_t len)
+                                         uint32_t addr, uint8_t *data, uint32_t len)
 {
     uint8_t *const flash_ctrl_buf = (uint8_t *)BFLB_SF_CTRL_BUF_BASE;
     uint32_t i = 0, cur_len = 0;

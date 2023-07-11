@@ -81,6 +81,7 @@ sdk_add_include_directories(.)
 
 if(NOT CONFIG_NEWLIB_STANDARD)
 if(CONFIG_VSNPRINTF_NANO)
+sdk_add_compile_definitions(-DCONFIG_VSNPRINTF_NANO=1)
 sdk_library_add_sources(vsnprintf_nano.c)
 else()
 sdk_library_add_sources(vsnprintf.c)
@@ -92,6 +93,8 @@ sdk_library_add_sources(snprintf.c)
 sdk_library_add_sources(sprintf.c)
 sdk_library_add_sources(vsprintf.c)
 sdk_library_add_sources(printf.c)
+
+sdk_add_link_options(-Wl,-wrap,snprintf -Wl,-wrap,sprintf)
 endif()
 
 # vsnprintf %f %F
