@@ -26,10 +26,11 @@
 #include "gc0328.h"
 #include "gc2053.h"
 #include "ov2685.h"
+#include "ov9660.h"
 #include "bflb_i2c.h"
 
 static struct image_sensor_config_s *sensor_list[] = {
-    NULL, &bf2013_config, &gc0308_config, &gc0328_config, &gc2053_config, &ov2685_config
+    NULL, &bf2013_config, &gc0308_config, &gc0328_config, &gc2053_config, &ov2685_config, &ov9660_config
 };
 
 void image_sensor_read(struct bflb_device_s *i2c, uint32_t sensor_index, struct image_sensor_command_s *read_list, uint32_t list_len)

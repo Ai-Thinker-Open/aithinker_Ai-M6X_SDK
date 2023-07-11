@@ -22,6 +22,7 @@ endif()
 
 # lcd driver
 if(CONFIG_BSP_LCD)
+<<<<<<< HEAD
 target_sources(app PRIVATE lcd/lcd.c)
 target_sources(app PRIVATE lcd/font.c)
 
@@ -36,14 +37,45 @@ target_sources(app PRIVATE lcd/spi/st7796_spi.c)
 target_sources(app PRIVATE lcd/spi/st7789v_spi.c)
 
 sdk_add_include_directories(lcd)
+=======
+    target_sources(app PRIVATE lcd/lcd.c)
+    target_sources(app PRIVATE lcd/font.c)
+
+    target_sources(app PRIVATE lcd/mipi_dbi/bl_mipi_dbi.c)
+    target_sources(app PRIVATE lcd/mipi_dbi/ili9488_dbi.c)
+    target_sources(app PRIVATE lcd/mipi_dbi/ili9341_dbi.c)
+    target_sources(app PRIVATE lcd/mipi_dbi/nt35510_dbi.c)
+
+    target_sources(app PRIVATE lcd/spi/bl_spi_hard_4.c)
+    target_sources(app PRIVATE lcd/spi/ili9341_spi.c)
+    target_sources(app PRIVATE lcd/spi/ili9488_spi.c)
+    target_sources(app PRIVATE lcd/spi/st7796_spi.c)
+    target_sources(app PRIVATE lcd/spi/st7796_spi_ai.c)
+    target_sources(app PRIVATE lcd/spi/st7789v_spi.c)
+    target_sources(app PRIVATE lcd/spi/gc9a01_spi.c)
+
+    target_sources(app PRIVATE lcd/mipi_dpi/standard_dpi.c)
+    target_sources(app PRIVATE lcd/mipi_dpi/ili9488_dpi.c)
+    target_sources(app PRIVATE lcd/mipi_dpi/gc9503v_dpi.c)
+    sdk_add_include_directories(lcd)
+>>>>>>> release/AiPi_Eyes_SDK
 endif()
 
 # touch sensor driver
 if(CONFIG_BSP_TOUCH)
+<<<<<<< HEAD
 target_sources(app PRIVATE touch/touch.c)
 target_sources(app PRIVATE touch/ft6x36_i2c.c)
 target_sources(app PRIVATE touch/gt911_i2c.c)
 sdk_add_include_directories(touch)
+=======
+    target_sources(app PRIVATE touch/touch.c)
+    target_sources(app PRIVATE touch/ft6x36_i2c.c)
+    target_sources(app PRIVATE touch/gt911_i2c.c)
+    target_sources(app PRIVATE touch/CHSC6540_i2c.c)
+    target_sources(app PRIVATE touch/CST816D_i2c.c)
+    sdk_add_include_directories(touch)
+>>>>>>> release/AiPi_Eyes_SDK
 endif()
 
 # image sensor driver
