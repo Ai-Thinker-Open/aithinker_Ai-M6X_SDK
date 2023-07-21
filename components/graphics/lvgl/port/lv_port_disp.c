@@ -3,7 +3,7 @@
  *
  */
 
-/*Copy this file as "lv_port_disp.c" and set this value to "1" to enable content*/
+ /*Copy this file as "lv_port_disp.c" and set this value to "1" to enable content*/
 #if 1
 
 /*********************
@@ -13,12 +13,12 @@
 #include "lv_port_disp.h"
 #include "lcd.h"
 
-/*********************
- *      DEFINES
- *********************/
+ /*********************
+  *      DEFINES
+  *********************/
 
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)
-/* Triple buffer mode, An additional video memory is required, for better performance */
+  /* Triple buffer mode, An additional video memory is required, for better performance */
 #define RGB_TRIPLE_BUFF_MODE 1
 #endif
 
@@ -26,26 +26,26 @@
  *      TYPEDEFS
  **********************/
 
-/**********************
- *  STATIC PROTOTYPES
- **********************/
+ /**********************
+  *  STATIC PROTOTYPES
+  **********************/
 
 static void disp_init(void);
-static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p);
+static void disp_flush(lv_disp_drv_t* disp_drv, const lv_area_t* area, lv_color_t* color_p);
 
 /**********************
  *  STATIC VARIABLES
  **********************/
 
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DBI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_SPI)
-/* MCU LCD Common interface */
+ /* MCU LCD Common interface */
 
 static lv_color_t draw_buf_1[LCD_W * LCD_H / 8] __attribute__((aligned(64))); /* A buffer */
 static lv_color_t draw_buf_2[LCD_W * LCD_H / 8] __attribute__((aligned(64))); /* An other buffer */
-static volatile lv_disp_drv_t *p_disp_drv_cb = NULL;
+static volatile lv_disp_drv_t* p_disp_drv_cb = NULL;
 
 #elif (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)
-/* RGB LCD Common interface */
+ /* RGB LCD Common interface */
 
 #if 0
 static lv_color_t draw_buf_1[LCD_W * LCD_H] ATTR_EALIGN(64); /*A screen sized buffer*/
@@ -74,8 +74,8 @@ static lv_color_t draw_buf_2[LCD_W * LCD_H] ATTR_NOINIT_PSRAM_SECTION __attribut
 // static lv_color_t *draw_buf_3 = (void *)(uintptr_t)LVGL_DRAW_BUF3_BASE;
 #if defined(CONFIG_PSRAM)
 static lv_color_t draw_buf_3[LCD_W * LCD_H] ATTR_NOINIT_PSRAM_SECTION __attribute__((aligned(64)));
-static volatile lv_color_t *last_disp_buff_p = (void *)(uintptr_t)draw_buf_3;
-static volatile lv_color_t *last_lvgl_flush_p = NULL;
+static volatile lv_color_t* last_disp_buff_p = (void*)(uintptr_t)draw_buf_3;
+static volatile lv_color_t* last_lvgl_flush_p = NULL;
 #else
 #error "No config psram!"
 #endif
@@ -98,9 +98,9 @@ lv_disp_drv_t disp_drv_dsc;
  *      MACROS
  **********************/
 
-/**********************
- *   GLOBAL FUNCTIONS
- **********************/
+ /**********************
+  *   GLOBAL FUNCTIONS
+  **********************/
 
 void lv_port_disp_init(void)
 {
@@ -113,35 +113,35 @@ void lv_port_disp_init(void)
      * Create a buffer for drawing
      *----------------------------*/
 
-    /* LVGL requires a buffer where it internally draws the widgets.
-     * Later this buffer will passed your display drivers `flush_cb` to copy its content to your display.
-     * The buffer has to be greater than 1 display row
-     *
-     * There are three buffering configurations:
-     * 1. Create ONE buffer with some rows:
-     *      LVGL will draw the display's content here and writes it to your display
-     *
-     * 2. Create TWO buffer with some rows:
-     *      LVGL will draw the display's content to a buffer and writes it your display.
-     *      You should use DMA to write the buffer's content to the display.
-     *      It will enable LVGL to draw the next part of the screen to the other buffer while
-     *      the data is being sent form the first buffer. It makes rendering and flushing parallel.
-     *
-     * 3. Create TWO screen-sized buffer:
-     *      Similar to 2) but the buffer have to be screen sized. When LVGL is ready it will give the
-     *      whole frame to display. This way you only need to change the frame buffer's address instead of
-     *      copying the pixels.
-     * */
+     /* LVGL requires a buffer where it internally draws the widgets.
+      * Later this buffer will passed your display drivers `flush_cb` to copy its content to your display.
+      * The buffer has to be greater than 1 display row
+      *
+      * There are three buffering configurations:
+      * 1. Create ONE buffer with some rows:
+      *      LVGL will draw the display's content here and writes it to your display
+      *
+      * 2. Create TWO buffer with some rows:
+      *      LVGL will draw the display's content to a buffer and writes it your display.
+      *      You should use DMA to write the buffer's content to the display.
+      *      It will enable LVGL to draw the next part of the screen to the other buffer while
+      *      the data is being sent form the first buffer. It makes rendering and flushing parallel.
+      *
+      * 3. Create TWO screen-sized buffer:
+      *      Similar to 2) but the buffer have to be screen sized. When LVGL is ready it will give the
+      *      whole frame to display. This way you only need to change the frame buffer's address instead of
+      *      copying the pixels.
+      * */
 
-/* MCU LCD Common interface */
+      /* MCU LCD Common interface */
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DBI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_SPI)
 
-    lv_disp_draw_buf_init((lv_disp_draw_buf_t *)&draw_buf_dsc, draw_buf_1, draw_buf_2, LCD_W * LCD_H / 8); /*Initialize the display buffer*/
+    lv_disp_draw_buf_init((lv_disp_draw_buf_t*)&draw_buf_dsc, draw_buf_1, draw_buf_2, LCD_W * LCD_H / 8); /*Initialize the display buffer*/
 
-/* RGB LCD Common interface,  */
+    /* RGB LCD Common interface,  */
 #elif (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)
 
-    lv_disp_draw_buf_init((lv_disp_draw_buf_t *)&draw_buf_dsc, draw_buf_1, draw_buf_2, LCD_W * LCD_H); /*Initialize the display buffer*/
+    lv_disp_draw_buf_init((lv_disp_draw_buf_t*)&draw_buf_dsc, draw_buf_1, draw_buf_2, LCD_W * LCD_H); /*Initialize the display buffer*/
 
 #endif
     /*-----------------------------------
@@ -161,7 +161,7 @@ void lv_port_disp_init(void)
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DBI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_SPI)
     disp_drv_dsc.sw_rotate = 0;
 
-/* RGB LCD Common interface,  */
+    /* RGB LCD Common interface,  */
 #elif (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)
     disp_drv_dsc.sw_rotate = 1;
     disp_drv_dsc.direct_mode = 1;
@@ -169,13 +169,20 @@ void lv_port_disp_init(void)
 #endif
 
     /*  rotation */
+#ifdef LCD_ROTATED_NONE
     disp_drv_dsc.rotated = LV_DISP_ROT_NONE;
-
+#elif defined LCD_ROTATED_90    
+    disp_drv_dsc.rotated = LV_DISP_ROT_90;
+#elif defined LCD_ROTATED_180   
+    disp_drv_dsc.rotated = LV_DISP_ROT_180;
+#elif defined LCD_ROTATED_270    
+    disp_drv_dsc.rotated = LV_DISP_ROT_270;
+#endif
     /*Used to copy the buffer's content to the display*/
     disp_drv_dsc.flush_cb = disp_flush;
 
     /*Set a display buffer*/
-    disp_drv_dsc.draw_buf = (lv_disp_draw_buf_t *)&draw_buf_dsc;
+    disp_drv_dsc.draw_buf = (lv_disp_draw_buf_t*)&draw_buf_dsc;
 
     /*Finally register the driver*/
     lv_disp_drv_register(&disp_drv_dsc);
@@ -184,12 +191,12 @@ void lv_port_disp_init(void)
 /**********************
  *   STATIC FUNCTIONS
  **********************/
-/* MCU LCD Common interface */
+ /* MCU LCD Common interface */
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DBI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_SPI)
 void flush_async_callback()
 {
     if (p_disp_drv_cb != NULL) {
-        lv_disp_flush_ready((lv_disp_drv_t *)p_disp_drv_cb);
+        lv_disp_flush_ready((lv_disp_drv_t*)p_disp_drv_cb);
         p_disp_drv_cb = NULL;
     }
 }
@@ -198,17 +205,18 @@ void flush_async_callback()
 
 void rgb_screen_frame_callback(void)
 {
-/* Triple buffer mode */
+    /* Triple buffer mode */
 #if RGB_TRIPLE_BUFF_MODE
 
-    lcd_color_t *screen_using = lcd_get_screen_using();
-    if (screen_using != (lcd_color_t *)last_disp_buff_p) {
+    lcd_color_t* screen_using = lcd_get_screen_using();
+    if (screen_using != (lcd_color_t*)last_disp_buff_p) {
         if (last_lvgl_flush_p == draw_buf_dsc.buf1) {
-            draw_buf_dsc.buf1 = (void *)last_disp_buff_p;
-            last_disp_buff_p = (lv_color_t *)screen_using;
-        } else if (last_lvgl_flush_p == draw_buf_dsc.buf2) {
-            draw_buf_dsc.buf2 = (void *)last_disp_buff_p;
-            last_disp_buff_p = (lv_color_t *)screen_using;
+            draw_buf_dsc.buf1 = (void*)last_disp_buff_p;
+            last_disp_buff_p = (lv_color_t*)screen_using;
+        }
+        else if (last_lvgl_flush_p == draw_buf_dsc.buf2) {
+            draw_buf_dsc.buf2 = (void*)last_disp_buff_p;
+            last_disp_buff_p = (lv_color_t*)screen_using;
         }
     }
 
@@ -238,12 +246,12 @@ void disp_init(void)
 {
     /* init MIPI-DPI */
 #if RGB_TRIPLE_BUFF_MODE
-    lcd_clear((lcd_color_t *)draw_buf_3, LCD_COLOR_RGB(0x00, 0x00, 0x00));
-    lcd_init((lcd_color_t *)draw_buf_3);
+    lcd_clear((lcd_color_t*)draw_buf_3, LCD_COLOR_RGB(0x00, 0x00, 0x00));
+    lcd_init((lcd_color_t*)draw_buf_3);
     lcd_frame_callback_register(FRAME_INT_TYPE_SWAP, rgb_screen_frame_callback);
 #else
-    lcd_clear((lcd_color_t *)draw_buf_1, LCD_COLOR_RGB(0x00, 0x00, 0x00));
-    lcd_init((lcd_color_t *)draw_buf_1);
+    lcd_clear((lcd_color_t*)draw_buf_1, LCD_COLOR_RGB(0x00, 0x00, 0x00));
+    lcd_init((lcd_color_t*)draw_buf_1);
     lcd_frame_callback_register(FRAME_INT_TYPE_CYCLE, rgb_screen_frame_callback);
 #endif
 }
@@ -253,10 +261,10 @@ void disp_init(void)
 /* Flush the content of the internal buffer the specific area on the display
  * You can use DMA or any hardware acceleration to do this operation in the background but
  * 'lv_disp_flush_ready()' has to be called when finished. */
-/* MCU LCD Common interface */
+ /* MCU LCD Common interface */
 #if (LCD_INTERFACE_TYPE == LCD_INTERFACE_DBI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_SPI)
 
-static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p)
+static void disp_flush(lv_disp_drv_t* disp_drv, const lv_area_t* area, lv_color_t* color_p)
 {
     static uint8_t rotated_dir = 0;
     if (rotated_dir != disp_drv->rotated) {
@@ -264,21 +272,21 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
         lcd_set_dir(rotated_dir, 0);
     }
     p_disp_drv_cb = disp_drv;
-    lcd_draw_picture_nonblocking(area->x1, area->y1, area->x2, area->y2, (lcd_color_t *)color_p);
+    lcd_draw_picture_nonblocking(area->x1, area->y1, area->x2, area->y2, (lcd_color_t*)color_p);
 }
 
 /* RGB LCD Common interface,  */
 #elif (LCD_INTERFACE_TYPE == LCD_INTERFACE_DPI) || (LCD_INTERFACE_TYPE == LCD_INTERFACE_DSI_VIDIO)
 
-static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p)
+static void disp_flush(lv_disp_drv_t* disp_drv, const lv_area_t* area, lv_color_t* color_p)
 {
     /* Triple buffer mode */
 #if RGB_TRIPLE_BUFF_MODE
-    lcd_screen_switch((lcd_color_t *)color_p);
+    lcd_screen_switch((lcd_color_t*)color_p);
     last_lvgl_flush_p = color_p;
 
 #else
-    lcd_screen_switch((lcd_color_t *)color_p);
+    lcd_screen_switch((lcd_color_t*)color_p);
     swap_flag = 1;
     while (swap_flag) {
         __NOP();
