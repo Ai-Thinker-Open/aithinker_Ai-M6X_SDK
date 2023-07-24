@@ -26,8 +26,8 @@
 
 #include "bflog.h"
 
-/*!< 启用LOG, 禁用将使LOG内容不参与编译 */
-/*!< log enable */
+ /*!< 启用LOG, 禁用将使LOG内容不参与编译 */
+ /*!< log enable */
 #define BFLOG_ENABLE
 
 /*!< 全局启用的LOG等级, 小于此等级的LOG内容不参与编译 */
@@ -127,7 +127,7 @@
 #define BFLOG_COLOR_FATAL BFLOG_COLOR_FG_MAGENTA BFLOG_COLOR_BG_NONE BFLOG_SGR_NORMAL
 #define BFLOG_COLOR_ERROR BFLOG_COLOR_FG_RED BFLOG_COLOR_BG_NONE BFLOG_SGR_NORMAL
 #define BFLOG_COLOR_WARN  BFLOG_COLOR_FG_YELLOW BFLOG_COLOR_BG_NONE BFLOG_SGR_NORMAL
-#define BFLOG_COLOR_INFO  BFLOG_COLOR_FG_NONE BFLOG_COLOR_BG_NONE BFLOG_SGR_RESET
+#define BFLOG_COLOR_INFO  BFLOG_COLOR_FG_GREEN BFLOG_COLOR_BG_NONE BFLOG_SGR_NORMAL
 #define BFLOG_COLOR_DEBUG BFLOG_COLOR_FG_WHITE BFLOG_COLOR_BG_NONE BFLOG_SGR_NORMAL
 #define BFLOG_COLOR_TRACE BFLOG_COLOR_FG_WHITE BFLOG_COLOR_BG_NONE BFLOG_SGR_FAINT
 
@@ -152,7 +152,7 @@
     "%s"                                                            \
     "[%c:%10lu]"                                                    \
     "[%s:%d]"                                                       \
-    "%10s> %s",                                                     \
+    "%10s> %s\033[0m\r\n",                                                     \
         (_color),                                                   \
         (_level[0]),                                                \
         ((_msg)->clkl),                                             \
