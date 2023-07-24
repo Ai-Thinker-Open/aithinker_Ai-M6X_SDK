@@ -29,7 +29,7 @@
 #include "bflb_i2c.h"
 #include "CST816D_i2c.h"
 
-static struct bflb_device_s *touch_cst816d_i2c = NULL;
+static struct bflb_device_s* touch_cst816d_i2c = NULL;
 
 typedef struct {
     uint8_t fresh;
@@ -40,12 +40,12 @@ typedef struct {
 
 POINT point[CST816D_MAX_TOUCH_POINT];
 
-static struct sw_touch_panel_platform_data *_touch_panel_data = NULL;
+static struct sw_touch_panel_platform_data* _touch_panel_data = NULL;
 struct sw_touch_panel_platform_data touch_panel_data;
 
 static void cst816d_i2c_gpio_init(void)
 {
-    struct bflb_device_s *ft63x6_i2c_gpio = NULL;
+    struct bflb_device_s* ft63x6_i2c_gpio = NULL;
     ft63x6_i2c_gpio = bflb_device_get_by_name("gpio");
 
     /* I2C0_SCL */
@@ -64,7 +64,8 @@ static int cst816d_i2c_peripheral_init(void)
         cst816d_i2c_gpio_init();
         /* init i2c 200k */
         bflb_i2c_init(touch_cst816d_i2c, 200000);
-    } else {
+    }
+    else {
         printf("i2c device get fail\r\n");
         return -1;
     }
@@ -72,7 +73,7 @@ static int cst816d_i2c_peripheral_init(void)
     return 0;
 }
 
-static int cst816d_i2c_write_byte(uint8_t register_addr, uint8_t *data_buf, uint16_t len)
+static int cst816d_i2c_write_byte(uint8_t register_addr, uint8_t* data_buf, uint16_t len)
 {
     static struct bflb_i2c_msg_s msg[2];
 
@@ -91,7 +92,7 @@ static int cst816d_i2c_write_byte(uint8_t register_addr, uint8_t *data_buf, uint
     return 0;
 }
 
-static int cst816d_i2c_read_byte(uint8_t register_addr, uint8_t *data_buf, uint16_t len)
+static int cst816d_i2c_read_byte(uint8_t register_addr, uint8_t* data_buf, uint16_t len)
 {
     static struct bflb_i2c_msg_s msg[2];
 
@@ -120,9 +121,9 @@ int cst816d_get_gesture_id()
     return data_buf;
 }
 
-int cst816d_i2c_init(touch_coord_t *max_value)
+int cst816d_i2c_init(touch_coord_t* max_value)
 {
-    uint8_t data_buf[3] = {0};
+    uint8_t data_buf[3] = { 0 };
     printf("cst816d i2c init\r\n");
 
     _touch_panel_data = &touch_panel_data;
@@ -145,9 +146,9 @@ int cst816d_i2c_init(touch_coord_t *max_value)
     return 0;
 }
 
-int cst816d_i2c_read(uint8_t *point_num, touch_coord_t *touch_coord, uint8_t max_num)
+int cst816d_i2c_read(uint8_t* point_num, touch_coord_t* touch_coord, uint8_t max_num)
 {
-    uint8_t point_data[10] = {0};
+    uint8_t point_data[10] = { 0 };
     uint8_t touch_num = 0, touch_type, touch_info;
     static uint8_t fresh_comm = 0;
     uint16_t xpos, ypos, touchSize;
@@ -155,7 +156,7 @@ int cst816d_i2c_read(uint8_t *point_num, touch_coord_t *touch_coord, uint8_t max
 
     *point_num = 0;
     point_data[1] = 0xff;
-    
+
     if (point_num == NULL || touch_coord == NULL || max_num == 0) {
         return -1;
     }
@@ -165,14 +166,14 @@ int cst816d_i2c_read(uint8_t *point_num, touch_coord_t *touch_coord, uint8_t max
     touch_num = point_data[2];
     xpos = ((uint16_t)(point_data[3] & 0X0F)<<8) + (uint16_t)point_data[4];
     ypos = ((uint16_t)(point_data[5] & 0X0F)<<8) + (uint16_t)point_data[6];
-    
-    if(point_data[1] == 0x00){  //point mode
-        printf("\n touch:(x=%d, y=%d), mode:%x, touch_type:%d\r\n", xpos, ypos, point_data[1], touch_type);
+
+    if (point_data[1] == 0x00) {  //point mode
+        // printf("\n touch:(x=%d, y=%d), mode:%x, touch_type:%d\r\n", xpos, ypos, point_data[1], touch_type);
         touch_type = point_data[3] >> 4;    //status
-        if(touch_type == 0x00){
+        if (touch_type == 0x00) {
 
         }
-        else if(touch_type == 0x04){
+        else if (touch_type == 0x04) {
 
         }
         touch_coord[0].coord_x = xpos;
@@ -180,40 +181,40 @@ int cst816d_i2c_read(uint8_t *point_num, touch_coord_t *touch_coord, uint8_t max
         *point_num = 1;
         return 0;
     }
-    if(point_data[1]==0x0c)
-	{
-		//TP_type = TP_LONG_EVENT;
-	}
-	
-	else if(point_data[1]==0x02)
-	{
-		//TP_type = TP_UP_EVENT;
-	}
-	else if(point_data[1]==0x01)
-	{
-		//TP_type = TP_DOWN_EVENT;
+    if (point_data[1]==0x0c)
+    {
+        //TP_type = TP_LONG_EVENT;
+    }
 
-	}
-	else if(point_data[1]==0x04)
-	{
-		//TP_type = TP_LEFT_EVENT;
+    else if (point_data[1]==0x02)
+    {
+        //TP_type = TP_UP_EVENT;
+    }
+    else if (point_data[1]==0x01)
+    {
+        //TP_type = TP_DOWN_EVENT;
 
-	}
-	else if(point_data[1]==0x03)
-	{
-		//TP_type = TP_RIGHT_EVENT;
+    }
+    else if (point_data[1]==0x04)
+    {
+        //TP_type = TP_LEFT_EVENT;
 
-	}
-	else if(point_data[1]==0x0e)
-	{
-		//TP_type = KU_MODE;
+    }
+    else if (point_data[1]==0x03)
+    {
+        //TP_type = TP_RIGHT_EVENT;
 
-	}
-	else if(point_data[1]==0x0d)
-	{
-		//TP_type = KLU_MODE;
+    }
+    else if (point_data[1]==0x0e)
+    {
+        //TP_type = KU_MODE;
 
-	}
+    }
+    else if (point_data[1]==0x0d)
+    {
+        //TP_type = KLU_MODE;
+
+    }
 
     /* Get the second point */
 
