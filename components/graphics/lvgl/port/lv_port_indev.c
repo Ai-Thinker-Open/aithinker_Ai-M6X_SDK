@@ -228,14 +228,17 @@ static void touchpad_read(lv_indev_drv_t* indev_drv, lv_indev_data_t* data)
         last_x = touch_coord.coord_x;
         last_y = touch_coord.coord_y;
 #elif defined LCD_ROTATED_90
-        last_x = touch_coord.coord_x;
-        last_y = 320-touch_coord.coord_y;
+        last_x = LCD_W-touch_coord.coord_x;
+        last_y = LCD_H-touch_coord.coord_y;
 #elif defined LCD_ROTATED_180
-        last_x = 240-touch_coord.coord_x;
-        last_y = 320-touch_coord.coord_y;
+        last_x = touch_coord.coord_x;
+        last_y = touch_coord.coord_y;
 #elif defined LCD_ROTATED_270
-        last_x = 240-touch_coord.coord_x;
-        last_y = 320-touch_coord.coord_y;
+        last_x = LCD_W-touch_coord.coord_x;
+        last_y = LCD_H-touch_coord.coord_y;
+#else 
+        last_x = touch_coord.coord_x;
+        last_y = touch_coord.coord_y;
 #endif
         data->state = LV_INDEV_STATE_PR;
     }
