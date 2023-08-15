@@ -12,6 +12,7 @@
 #include "lv_port_indev.h"
 #include "bflb_core.h"
 #include "lcd.h"
+#include "touch.h"
  /*********************
   *      DEFINES
   *********************/
@@ -23,9 +24,10 @@
    /**********************
     *  STATIC PROTOTYPES
     **********************/
-
+#ifndef ENCODER_ENABLE
 static void touchpad_init(void);
 static void touchpad_read(lv_indev_drv_t* indev_drv, lv_indev_data_t* data);
+#endif
 
 #if 0
 static void mouse_init(void);
@@ -40,10 +42,10 @@ static bool keypad_read(lv_indev_drv_t* indev_drv, lv_indev_data_t* data);
 static uint32_t keypad_get_key(void);
 #endif
 
-#if 0
+#ifdef ENCODER_ENABLE
 static void encoder_init(void);
 static bool encoder_read(lv_indev_drv_t* indev_drv, lv_indev_data_t* data);
-static void encoder_handler(void);
+// static void encoder_handler(void);
 #endif
 
 #if 0
@@ -56,14 +58,17 @@ static bool button_is_pressed(uint8_t id);
 /**********************
  *  STATIC VARIABLES
  **********************/
-lv_indev_t* indev_touchpad;
+#ifdef ENCODER_ENABLE
+lv_indev_t* indev_encoder;
+static int32_t encoder_diff;
+static lv_indev_state_t encoder_state;
 // lv_indev_t *indev_mouse;
 // lv_indev_t *indev_keypad;
-// lv_indev_t *indev_encoder;
 // lv_indev_t *indev_button;
+#else 
+lv_indev_t* indev_touchpad;
+#endif
 
-// static int32_t encoder_diff;
-// static lv_indev_state_t encoder_state;
 
 /**********************
  *      MACROS
@@ -87,7 +92,7 @@ void lv_port_indev_init(void)
      */
 
     static lv_indev_drv_t indev_drv;
-
+#ifndef  ENCODER_ENABLE
     /*------------------
      * Touchpad
      * -----------------*/
@@ -100,7 +105,7 @@ void lv_port_indev_init(void)
     indev_drv.type = LV_INDEV_TYPE_POINTER;
     indev_drv.read_cb = touchpad_read;
     indev_touchpad = lv_indev_drv_register(&indev_drv);
-
+#endif
 #if 0
     lv_obj_t* touchpad_cursor = lv_img_create(lv_scr_act());
     // lv_img_set_src(touchpad_cursor, LV_SYMBOL_EDIT);
@@ -149,7 +154,7 @@ void lv_port_indev_init(void)
      /*------------------
       * Encoder
       * -----------------*/
-#if 0
+#ifdef ENCODER_ENABLE
       /*Initialize your encoder if you have*/
     encoder_init();
 
@@ -190,11 +195,11 @@ void lv_port_indev_init(void)
 /**********************
  *   STATIC FUNCTIONS
  **********************/
-
+#ifndef ENCODER_ENABLE
  /*------------------
   * Touchpad
   * -----------------*/
-#include "touch.h"
+
 uint8_t no_touch = 0;
 
 /*Initialize your touchpad*/
@@ -277,7 +282,7 @@ static void touchpad_read(lv_indev_drv_t* indev_drv, lv_indev_data_t* data)
 //     device_control(touch_spi, DEVICE_CTRL_SPI_CONFIG_CLOCK, (void *)(uintptr_t)spi_clock);
 //     return res;
 // }
-
+#endif
 /*------------------
  * Mouse
  * -----------------*/
@@ -460,94 +465,130 @@ static uint32_t keypad_get_key(void)
 /*------------------
  * Encoder
  * -----------------*/
-
+#ifdef ENCODER_ENABLE
  /* Initialize your keypad */
- // static void encoder_init(void)
- // {
- //     /*Your code comes here*/
- // }
+int32_t get_encoder_cnt(void)
+{
+    int8_t status = 0;
+    if (encoder_diff > 0) {
+        encoder_diff--;
+        status = 1;
+    }
+    else if (encoder_diff < 0) {
+        encoder_diff++;
+        status = -1;
+    }
 
- /* Will be called by the library to read the encoder */
- // static bool encoder_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
- // {
+    return status;
+}
+static void encoder_init(void)
+{
+    /*Your code comes here*/
+}
 
- //     data->enc_diff = encoder_diff;
- //     data->state = encoder_state;
+/* Will be called by the library to read the encoder */
+static bool encoder_read(lv_indev_drv_t* indev_drv, lv_indev_data_t* data)
+{
 
- //     /*Return `false` because we are not buffering and no more data to read*/
- //     return false;
- // }
+    data->enc_diff = get_encoder_cnt();
+    data->state = encoder_state;
+    if (encoder_state == LV_INDEV_STATE_PR) {
+        encoder_state = LV_INDEV_STATE_REL;
+    }
 
- /*Call this function in an interrupt to process encoder events (turn, press)*/
- // static void encoder_handler(void)
- // {
- //     /*Your code comes here*/
+    /*Return `false` because we are not buffering and no more data to read*/
+    return false;
+}
 
- //     encoder_diff += 0;
- //     encoder_state = LV_INDEV_STATE_REL;
- // }
+/*Call this function in an interrupt to process encoder events (turn, press)*/
+void encoder_handler(uint8_t press_type)
+{
+    /*Your code comes here*/
 
- /*------------------
-  * Button
-  * -----------------*/
+    switch (press_type)
+    {
+        case 1:
+            encoder_diff++;
+            encoder_state = LV_INDEV_STATE_REL;
+            break;
+        case 2:
+            encoder_diff--;
+            encoder_state = LV_INDEV_STATE_REL;
+            break;
+        case 3:
+            encoder_state = LV_INDEV_STATE_PR;
+            break;
+        case 4:
+            break;
+        default:
+            break;
+    }
+}
+#endif
+/*------------------
+ * Button
+ * -----------------*/
 
-  /* Initialize your buttons */
-  // static void button_init(void)
-  // {
-  //     /*Your code comes here*/
-  // }
 
-  /* Will be called by the library to read the button */
-  // static bool button_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
-  // {
+#if 0
+ /* Initialize your buttons */
+static void button_init(void)
+{
+    /*Your code comes here*/
+}
 
-  //     static uint8_t last_btn = 0;
+/* Will be called by the library to read the button */
+static bool button_read(lv_indev_drv_t* indev_drv, lv_indev_data_t* data)
+{
 
-  //     /*Get the pressed button's ID*/
-  //     int8_t btn_act = button_get_pressed_id();
+    static uint8_t last_btn = 0;
 
-  //     if(btn_act >= 0) {
-  //         data->state = LV_INDEV_STATE_PR;
-  //         last_btn = btn_act;
-  //     } else {
-  //         data->state = LV_INDEV_STATE_REL;
-  //     }
+    /*Get the pressed button's ID*/
+    int8_t btn_act = button_get_pressed_id();
 
-  //     /*Save the last pressed button's ID*/
-  //     data->btn_id = last_btn;
+    if (btn_act >= 0) {
+        data->state = LV_INDEV_STATE_PR;
+        last_btn = btn_act;
+    }
+    else {
+        data->state = LV_INDEV_STATE_REL;
+    }
 
-  //     /*Return `false` because we are not buffering and no more data to read*/
-  //     return false;
-  // }
+    /*Save the last pressed button's ID*/
+    data->btn_id = last_btn;
 
-  /*Get ID  (0, 1, 2 ..) of the pressed button*/
-  // static int8_t button_get_pressed_id(void)
-  // {
-  //     uint8_t i;
+    /*Return `false` because we are not buffering and no more data to read*/
+    return false;
+}
 
-  //     /*Check to buttons see which is being pressed (assume there are 2 buttons)*/
-  //     for(i = 0; i < 2; i++) {
-  //         /*Return the pressed button's ID*/
-  //         if(button_is_pressed(i)) {
-  //             return i;
-  //         }
-  //     }
+/*Get ID  (0, 1, 2 ..) of the pressed button*/
+static int8_t button_get_pressed_id(void)
+{
+    uint8_t i;
 
-  //     /*No button pressed*/
-  //     return -1;
-  // }
+    /*Check to buttons see which is being pressed (assume there are 2 buttons)*/
+    for (i = 0; i < 2; i++) {
+        /*Return the pressed button's ID*/
+        if (button_is_pressed(i)) {
+            return i;
+        }
+    }
 
-  /*Test if `id` button is pressed or not*/
-  // static bool button_is_pressed(uint8_t id)
-  // {
+    /*No button pressed*/
+    return -1;
+}
 
-  //     /*Your code comes here*/
+/*Test if `id` button is pressed or not*/
+static bool button_is_pressed(uint8_t id)
+{
 
-  //     return false;
-  // }
+    /*Your code comes here*/
 
+    return false;
+}
+#endif
 #else /* Enable this file at the top */
 
-/* This dummy typedef exists purely to silence -Wpedantic. */
+ /* This dummy typedef exists purely to silence -Wpedantic. */
 typedef int keep_pedantic_happy;
 #endif
