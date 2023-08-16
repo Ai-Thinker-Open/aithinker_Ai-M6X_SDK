@@ -170,6 +170,14 @@
 #define LCD_COLOR_DEPTH              GC9A01_SPI_COLOR_DEPTH
 #define _LCD_FUNC_DEFINE(_func, ...) gc9a01_spi_##_func(__VA_ARGS__)
 
+#elif defined LCD_SPI_UE043HV
+
+#include "spi/ue043hv_spi.h"
+#define LCD_INTERFACE_TYPE           LCD_INTERFACE_SPI
+#define LCD_W                        UE043HV_SPI_W
+#define LCD_H                        UE043HV_SPI_H
+#define LCD_COLOR_DEPTH              UE043HV_SPI_COLOR_DEPTH
+#define _LCD_FUNC_DEFINE(_func, ...)  ue043hv_spi_##_func(__VA_ARGS__)
 #else
 #error "Please select a screen type"
 #endif
