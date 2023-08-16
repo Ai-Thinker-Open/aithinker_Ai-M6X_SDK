@@ -1,0 +1,2 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/port/bl616_clock.c:4:10:bflb_clk_get_system_clock	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/port/bl616_clock.c:23:10:bflb_clk_get_peripheral_clock	0	static

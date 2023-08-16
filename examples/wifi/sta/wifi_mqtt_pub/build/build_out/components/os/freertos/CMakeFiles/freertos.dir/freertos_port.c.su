@@ -1,0 +1,7 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/freertos_port.c:5:28:vAssertCalled	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/freertos_port.c:13:28:vApplicationTickHook	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/freertos_port.c:18:28:vApplicationStackOverflowHook	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/freertos_port.c:26:28:vApplicationMallocFailedHook	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/freertos_port.c:34:28:vApplicationGetIdleTaskMemory	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/freertos_port.c:58:28:vApplicationGetTimerTaskMemory	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/freertos_port.c:80:6:__errno	0	static

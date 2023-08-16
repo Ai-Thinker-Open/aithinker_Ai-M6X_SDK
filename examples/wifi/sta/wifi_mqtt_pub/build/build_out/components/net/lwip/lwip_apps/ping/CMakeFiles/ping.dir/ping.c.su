@@ -1,0 +1,4 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip_apps/ping/ping.c:68:7:lwip_ping_send	48	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip_apps/ping/ping.c:99:5:lwip_ping_recv	128	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip_apps/ping/ping.c:122:10:ping	240	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip_apps/ping/ping.c:207:5:cmd_ping	112	static

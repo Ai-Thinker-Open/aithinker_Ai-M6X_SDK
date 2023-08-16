@@ -1,0 +1,2 @@
+riscv64-unknown-elf-ar qc ../../../../../lib/libdhcpd.a CMakeFiles/dhcpd.dir/dhcp_server_raw.c.o
+riscv64-unknown-elf-ranlib ../../../../../lib/libdhcpd.a

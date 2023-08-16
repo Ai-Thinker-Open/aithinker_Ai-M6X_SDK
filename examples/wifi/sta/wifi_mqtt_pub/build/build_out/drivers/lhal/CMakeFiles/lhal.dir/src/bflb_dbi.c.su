@@ -1,0 +1,13 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:30:6:bflb_dbi_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:205:6:bflb_dbi_deinit	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:224:6:bflb_dbi_qspi_set_addr	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:313:5:bflb_dbi_send_cmd_data	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:402:5:bflb_dbi_send_cmd_read_data	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:489:5:bflb_dbi_send_cmd_pixel	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:571:6:bflb_dbi_link_txdma	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:587:6:bflb_dbi_txint_mask	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:603:6:bflb_dbi_tcint_mask	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:619:6:bflb_dbi_errint_mask	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:635:10:bflb_dbi_get_intstatus	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:664:6:bflb_dbi_int_clear	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dbi.c:681:5:bflb_dbi_feature_control	0	static

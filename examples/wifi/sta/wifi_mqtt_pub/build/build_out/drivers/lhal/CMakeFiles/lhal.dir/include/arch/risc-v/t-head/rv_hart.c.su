@@ -1,0 +1,5 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/include/arch/risc-v/t-head/rv_hart.c:13:32:rv_hart_hang	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/include/arch/risc-v/t-head/rv_hart.c:23:5:rv_hart_misa_ext_chk	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/include/arch/risc-v/t-head/rv_hart.c:42:6:rv_enterSupervisor	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/include/arch/risc-v/t-head/rv_hart.c:59:6:rv_enterUser	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/include/arch/risc-v/t-head/rv_hart.c:75:1:rv_hart_switch_mode_from_M	0	static

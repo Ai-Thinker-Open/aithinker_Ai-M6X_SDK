@@ -1,0 +1,5 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/examples/wifi/sta/wifi_mqtt_pub/wifi_mqtt_pub.c:212:13:publish_callback_1	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/examples/wifi/sta/wifi_mqtt_pub/wifi_mqtt_pub.c:217:13:client_refresher	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/examples/wifi/sta/wifi_mqtt_pub/wifi_mqtt_pub.c:92:13:test_close	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/examples/wifi/sta/wifi_mqtt_pub/wifi_mqtt_pub.c:106:12:example_mqtt.isra	496	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/examples/wifi/sta/wifi_mqtt_pub/wifi_mqtt_pub.c:241:5:cmd_mqtt_publisher	16	static

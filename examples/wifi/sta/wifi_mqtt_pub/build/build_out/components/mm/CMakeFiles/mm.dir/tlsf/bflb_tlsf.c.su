@@ -1,0 +1,9 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/mm/tlsf/bflb_tlsf.c:250:13:mem_tlfsinfo_walker	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/mm/tlsf/bflb_tlsf.c:209:13:bflb_mem_free_delaylist	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/mm/tlsf/bflb_tlsf.c:268:6:bflb_mem_init	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/mm/tlsf/bflb_tlsf.c:304:7:bflb_malloc	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/mm/tlsf/bflb_tlsf.c:329:6:bflb_free	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/mm/tlsf/bflb_tlsf.c:362:7:bflb_realloc	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/mm/tlsf/bflb_tlsf.c:386:7:bflb_calloc	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/mm/tlsf/bflb_tlsf.c:417:7:bflb_malloc_align	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/mm/tlsf/bflb_tlsf.c:441:6:bflb_mem_usage	16	static

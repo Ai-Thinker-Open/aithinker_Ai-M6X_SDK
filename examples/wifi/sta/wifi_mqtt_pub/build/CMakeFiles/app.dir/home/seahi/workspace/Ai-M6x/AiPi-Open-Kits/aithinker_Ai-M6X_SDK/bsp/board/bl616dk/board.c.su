@@ -1,0 +1,17 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:556:13:reboot_cmd	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:126:10:board_psram_x8_init	48	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:141:6:bl_show_log	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:155:6:bl_show_flashinfo	112	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:207:6:board_init	112	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:260:6:board_uartx_gpio_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:272:6:board_i2c0_gpio_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:283:6:board_spi0_gpio_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:298:6:board_pwm_gpio_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:313:6:board_adc_gpio_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:344:6:board_dac_gpio_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:355:6:board_emac_gpio_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:376:6:board_sdh_gpio_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:389:6:board_ir_gpio_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:398:6:board_dvp_gpio_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:465:6:board_i2s_gpio_init	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c:476:6:board_acomp_init	32	static

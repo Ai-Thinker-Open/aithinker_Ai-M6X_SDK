@@ -1,0 +1,2 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lib/mqtt/MQTT-C/src/mqtt_pal.c:536:9:mqtt_pal_sendall	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lib/mqtt/MQTT-C/src/mqtt_pal.c:562:9:mqtt_pal_recvall	32	static

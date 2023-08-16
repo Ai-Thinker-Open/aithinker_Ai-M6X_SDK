@@ -1,0 +1,9 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_aon.c:347:30:AON_Output_Float_LDO15_RF	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_aon.c:372:30:AON_Output_Pulldown_LDO15_RF	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_aon.c:397:30:AON_Output_LDO15_RF_Ctrl_by_Pd	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_aon.c:464:30:AON_Power_On_MicBias	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_aon.c:486:30:AON_Power_Off_MicBias	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_aon.c:506:30:AON_LowPower_Enter_PDS0	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_aon.c:538:30:AON_LowPower_Exit_PDS0	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_aon.c:721:30:AON_Output_Pulldown_DCDC18	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_aon.c:739:30:AON_Output_Float_DCDC18	0	static

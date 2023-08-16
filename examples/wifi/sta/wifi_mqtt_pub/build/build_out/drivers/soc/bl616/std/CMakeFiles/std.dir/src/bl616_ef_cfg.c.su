@@ -1,0 +1,15 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:290:10:bflb_ef_ctrl_get_common_trim_list	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:304:6:bflb_ef_ctrl_get_device_info	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:327:9:bflb_efuse_is_mac_address_slot_empty	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:359:5:bflb_efuse_write_mac_address_opt	48	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:419:5:bflb_efuse_read_mac_address_opt	48	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:311:6:bflb_efuse_get_chipid	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:470:7:bflb_efuse_get_adc_trim	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:497:10:bflb_efuse_get_adc_tsen_trim	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:511:6:bflb_efuse_read_secure_boot	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:520:6:bflb_efuse_write_aes_key	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:533:6:bflb_efuse_read_aes_key	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:546:6:bflb_efuse_lock_aes_key_write	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:561:6:bflb_efuse_lock_aes_key_read	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:576:6:bflb_efuse_write_sw_usage	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_ef_cfg.c:581:6:bflb_efuse_read_sw_usage	0	static

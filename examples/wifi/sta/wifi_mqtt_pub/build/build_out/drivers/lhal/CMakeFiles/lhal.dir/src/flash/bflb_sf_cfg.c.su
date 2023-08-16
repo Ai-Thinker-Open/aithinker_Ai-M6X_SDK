@@ -1,0 +1,10 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/flash/bflb_sf_cfg.c:2809:22:bflb_sf_cfg_init_ext_flash_gpio	48	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/flash/bflb_sf_cfg.c:2876:22:bflb_sf_cfg_deinit_ext_flash_gpio	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/flash/bflb_sf_cfg.c:2951:22:bflb_sf_cfg_get_flash_cfg_need_lock	128	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/flash/bflb_sf_cfg.c:2999:22:bflb_sf_cfg_get_flash_cfg_need_lock_ext	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/flash/bflb_sf_cfg.c:3301:22:bflb_sf_cfg_init_flash2_gpio	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/flash/bflb_sf_cfg.c:3017:22:bflb_sf_cfg_init_flash_gpio	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/flash/bflb_sf_cfg.c:3328:27:bflb_sf_cfg_flash_identify	64	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/flash/bflb_sf_cfg.c:3494:27:bflb_sf_cfg_flash_identify_ext	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/flash/bflb_sf_cfg.c:3513:22:bflb_sf_cfg_flash_init	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/flash/bflb_sf_cfg.c:3597:22:bflb_sf_cfg_sbus2_flash_init	16	static

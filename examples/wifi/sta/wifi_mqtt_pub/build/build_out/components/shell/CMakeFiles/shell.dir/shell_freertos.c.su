@@ -1,0 +1,9 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/shell/shell_freertos.c:15:13:shell_exec_task	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/shell/shell_freertos.c:102:13:shell_task	48	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/shell/shell_freertos.c:132:13:ps_cmd	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/shell/shell_freertos.c:84:6:uart_shell_isr	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/shell/shell_freertos.c:26:6:shell_dup_line	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/shell/shell_freertos.c:32:6:shell_abort_exec	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/shell/shell_freertos.c:43:5:shell_start_exec	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/shell/shell_freertos.c:72:6:shell_release_sem	32	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/shell/shell_freertos.c:117:6:shell_init_with_task	16	static

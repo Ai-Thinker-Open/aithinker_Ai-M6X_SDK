@@ -1,0 +1,6 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/toolchain/riscv64-unknown-elf/include/reent.h:153:14:_sbrk_r	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/libc/newlib/port_memory.c:28:7:_malloc_r	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/libc/newlib/port_memory.c:50:7:_realloc_r	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/libc/newlib/port_memory.c:72:7:_calloc_r	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/libc/newlib/port_memory.c:94:7:_memalign_r	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/libc/newlib/port_memory.c:114:6:_free_r	0	static

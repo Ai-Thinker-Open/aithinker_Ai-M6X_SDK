@@ -1,0 +1,9 @@
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_ciphersuites.c:2205:12:mbedtls_ssl_list_ciphersuites	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_ciphersuites.c:2236:34:mbedtls_ssl_ciphersuite_from_string	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_ciphersuites.c:2255:34:mbedtls_ssl_ciphersuite_from_id	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_ciphersuites.c:2270:13:mbedtls_ssl_get_ciphersuite_name	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_ciphersuites.c:2282:5:mbedtls_ssl_get_ciphersuite_id	16	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_ciphersuites.c:2295:19:mbedtls_ssl_get_ciphersuite_sig_pk_alg	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_ciphersuites.c:2317:19:mbedtls_ssl_get_ciphersuite_sig_alg	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_ciphersuites.c:2338:5:mbedtls_ssl_ciphersuite_uses_ec	0	static
+/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_ciphersuites.c:2357:5:mbedtls_ssl_ciphersuite_uses_psk	0	static
