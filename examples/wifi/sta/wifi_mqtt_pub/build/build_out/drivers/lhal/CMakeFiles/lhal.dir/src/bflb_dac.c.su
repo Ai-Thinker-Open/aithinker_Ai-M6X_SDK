@@ -1,5 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dac.c:10:6:bflb_dac_init	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dac.c:57:6:bflb_dac_channel_enable	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dac.c:82:6:bflb_dac_channel_disable	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dac.c:102:6:bflb_dac_link_txdma	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_dac.c:140:6:bflb_dac_set_value	0	static

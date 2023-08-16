@@ -1,3 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/error.c:214:14:mbedtls_high_level_strerr	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/error.c:578:14:mbedtls_low_level_strerr	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/error.c:896:6:mbedtls_strerror	32	static

@@ -1,3 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_common.c:66:23:ASM_Delay_Us	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_common.c:127:23:arch_delay_us	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/soc/bl616/std/src/bl616_common.c:182:23:arch_delay_ms	16	static

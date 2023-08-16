@@ -1,9 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_i2s.c:5:6:bflb_i2s_init	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_i2s.c:132:6:bflb_i2s_deinit	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_i2s.c:146:6:bflb_i2s_link_txdma	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_i2s.c:161:6:bflb_i2s_link_rxdma	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_i2s.c:176:6:bflb_i2s_txint_mask	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_i2s.c:190:6:bflb_i2s_rxint_mask	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_i2s.c:204:6:bflb_i2s_errint_mask	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_i2s.c:218:10:bflb_i2s_get_intstatus	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_i2s.c:233:5:bflb_i2s_feature_control	0	static

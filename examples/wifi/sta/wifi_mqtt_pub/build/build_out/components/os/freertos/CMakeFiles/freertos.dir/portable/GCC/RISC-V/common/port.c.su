@@ -1,3 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/portable/GCC/RISC-V/common/port.c:131:7:vPortSetupTimerInterrupt	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/portable/GCC/RISC-V/common/port.c:167:12:xPortStartScheduler	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/portable/GCC/RISC-V/common/port.c:222:6:vPortEndScheduler	0	static

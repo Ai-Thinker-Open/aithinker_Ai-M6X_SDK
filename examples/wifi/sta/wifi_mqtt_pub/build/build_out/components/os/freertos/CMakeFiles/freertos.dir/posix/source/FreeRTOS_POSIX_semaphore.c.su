@@ -1,7 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_semaphore.c:45:5:sem_destroy	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_semaphore.c:57:5:sem_getvalue	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_semaphore.c:74:5:sem_init	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_semaphore.c:109:5:sem_post	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_semaphore.c:129:5:sem_timedwait	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_semaphore.c:205:5:sem_trywait	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_semaphore.c:227:5:sem_wait	16	static

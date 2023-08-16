@@ -1,9 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/gcm.c:192:13:gcm_mult	48	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/gcm.c:64:6:mbedtls_gcm_init	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/gcm.c:138:5:mbedtls_gcm_setkey	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/gcm.c:248:5:mbedtls_gcm_starts	80	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/gcm.c:337:5:mbedtls_gcm_update	96	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/gcm.c:400:5:mbedtls_gcm_finish	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/gcm.c:441:5:mbedtls_gcm_crypt_and_tag	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/gcm.c:474:5:mbedtls_gcm_auth_decrypt	48	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/gcm.c:517:6:mbedtls_gcm_free	16	static

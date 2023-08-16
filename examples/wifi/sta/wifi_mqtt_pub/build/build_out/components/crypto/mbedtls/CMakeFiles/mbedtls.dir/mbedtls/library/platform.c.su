@@ -1,5 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/platform.c:59:8:mbedtls_calloc	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/platform.c:64:6:mbedtls_free	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/platform.c:69:5:mbedtls_platform_set_calloc_free	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/platform.c:370:5:mbedtls_platform_setup	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/platform.c:380:6:mbedtls_platform_teardown	0	static

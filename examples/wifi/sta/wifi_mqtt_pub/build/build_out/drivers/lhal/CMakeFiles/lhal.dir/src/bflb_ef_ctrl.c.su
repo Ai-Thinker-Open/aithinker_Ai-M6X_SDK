@@ -1,8 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_ef_ctrl.c:499:22:bflb_ef_ctrl_autoload_done	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_ef_ctrl.c:531:23:bflb_ef_ctrl_write_direct	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_ef_ctrl.c:616:23:bflb_ef_ctrl_read_direct	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_ef_ctrl.c:691:23:bflb_ef_ctrl_read_common_trim	48	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_ef_ctrl.c:782:23:bflb_ef_ctrl_write_common_trim	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_ef_ctrl.c:869:26:bflb_ef_ctrl_is_all_bits_zero	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_ef_ctrl.c:896:27:bflb_ef_ctrl_get_byte_zero_cnt	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_ef_ctrl.c:919:28:bflb_ef_ctrl_get_trim_parity	0	static

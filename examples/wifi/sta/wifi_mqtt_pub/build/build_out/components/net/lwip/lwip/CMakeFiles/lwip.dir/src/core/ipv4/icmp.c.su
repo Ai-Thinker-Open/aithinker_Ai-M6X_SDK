@@ -1,4 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/core/ipv4/icmp.c:366:13:icmp_send_response	48	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/core/ipv4/icmp.c:79:6:icmp_input	48	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/core/ipv4/icmp.c:336:6:icmp_dest_unreach	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/core/ipv4/icmp.c:350:6:icmp_time_exceeded	0	static

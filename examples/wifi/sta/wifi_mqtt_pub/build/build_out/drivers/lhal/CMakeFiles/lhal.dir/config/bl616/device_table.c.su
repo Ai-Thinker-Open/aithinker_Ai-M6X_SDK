@@ -1,3 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/config/bl616/device_table.c:301:23:bflb_device_get_by_name	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/config/bl616/device_table.c:311:23:bflb_device_get_by_id	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/config/bl616/device_table.c:321:6:bflb_device_set_userdata	0	static

@@ -1,6 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_acomp.c:12:6:bflb_acomp_init	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_acomp.c:55:6:bflb_acomp_enable	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_acomp.c:71:6:bflb_acomp_disable	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_acomp.c:88:10:bflb_acomp_get_result	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_acomp.c:103:10:bflb_acomp_gpio_2_chanid	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/drivers/lhal/src/bflb_acomp.c:211:10:bflb_acomp_chanid_2_gpio	0	static

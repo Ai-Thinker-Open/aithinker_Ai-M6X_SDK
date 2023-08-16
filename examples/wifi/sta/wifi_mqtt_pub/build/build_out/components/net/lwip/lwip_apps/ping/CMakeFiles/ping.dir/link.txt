@@ -1,2 +1,0 @@
-riscv64-unknown-elf-ar qc ../../../../../lib/libping.a CMakeFiles/ping.dir/ping.c.o
-riscv64-unknown-elf-ranlib ../../../../../lib/libping.a

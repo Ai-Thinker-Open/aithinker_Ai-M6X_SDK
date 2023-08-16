@@ -1,3 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_cli.c:2682:12:ssl_check_server_ecdh_params	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_cli.c:982:12:ssl_write_client_hello	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/ssl_cli.c:4476:5:mbedtls_ssl_handshake_client_step	160	static

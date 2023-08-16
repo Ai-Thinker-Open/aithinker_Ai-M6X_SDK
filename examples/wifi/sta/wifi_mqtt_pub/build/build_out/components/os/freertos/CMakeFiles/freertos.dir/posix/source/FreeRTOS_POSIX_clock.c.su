@@ -1,7 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_clock.c:50:9:clock	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_clock.c:59:5:clock_getcpuclockid	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_clock.c:72:5:clock_getres	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_clock.c:90:5:clock_gettime	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_clock.c:122:5:clock_nanosleep	48	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_clock.c:196:5:clock_settime	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_clock.c:212:5:nanosleep	32	static

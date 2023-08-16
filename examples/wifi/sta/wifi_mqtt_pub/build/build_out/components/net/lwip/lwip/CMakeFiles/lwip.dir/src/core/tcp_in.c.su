@@ -1,6 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/core/tcp_in.c:1164:13:tcp_oos_insert_segment	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/core/tcp_in.c:1203:24:tcp_free_acked_segments.constprop	48	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/core/tcp_in.c:1258:13:tcp_receive	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/core/tcp_in.c:2108:13:tcp_parseopt.part.0	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/core/tcp_in.c:117:6:tcp_input	112	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/core/tcp_in.c:2251:6:tcp_trigger_input_pcb_close	0	static

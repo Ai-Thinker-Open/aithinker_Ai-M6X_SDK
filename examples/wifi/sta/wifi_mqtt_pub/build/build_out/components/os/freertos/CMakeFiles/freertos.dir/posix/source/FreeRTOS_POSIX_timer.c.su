@@ -1,6 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_timer.c:61:6:prvTimerCallback	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_timer.c:101:5:timer_create	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_timer.c:153:5:timer_delete	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_timer.c:180:5:timer_getoverrun	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_timer.c:190:5:timer_settime	80	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_timer.c:302:5:timer_gettime	32	static

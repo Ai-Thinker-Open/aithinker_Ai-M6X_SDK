@@ -1,2 +1,0 @@
-riscv64-unknown-elf-ar qc ../../lib/librfparam.a CMakeFiles/rfparam.dir/Src/rfparam_adapter.c.o CMakeFiles/rfparam.dir/Src/rfparam_rftlv.c.o
-riscv64-unknown-elf-ranlib ../../lib/librfparam.a

@@ -1,7 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/utils/bflb_block_pool/bflb_block_pool.c:49:5:bflb_block_pool_create	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/utils/bflb_block_pool/bflb_block_pool.c:138:5:bflb_block_pool_delete	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/utils/bflb_block_pool/bflb_block_pool.c:168:5:bflb_block_pool_add_mtx	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/utils/bflb_block_pool/bflb_block_pool.c:190:5:bflb_block_pool_add_sem	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/utils/bflb_block_pool/bflb_block_pool.c:212:5:bflb_block_pool_alloc	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/utils/bflb_block_pool/bflb_block_pool.c:269:5:bflb_block_pool_free	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/utils/bflb_block_pool/bflb_block_pool.c:327:6:bflb_block_pool_info_get	0	static

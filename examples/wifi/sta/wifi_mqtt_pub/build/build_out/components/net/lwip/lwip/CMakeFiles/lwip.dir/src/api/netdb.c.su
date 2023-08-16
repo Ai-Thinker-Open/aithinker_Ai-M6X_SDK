@@ -1,4 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/api/netdb.c:87:1:lwip_gethostbyname	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/api/netdb.c:165:5:lwip_gethostbyname_r	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/api/netdb.c:242:6:lwip_freeaddrinfo	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/net/lwip/lwip/src/api/netdb.c:274:5:lwip_getaddrinfo	48	static

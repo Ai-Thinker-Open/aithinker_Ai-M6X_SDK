@@ -1,2 +1,0 @@
-riscv64-unknown-elf-ar qc ../../../../lib/libbl6_os_adapter.a CMakeFiles/bl6_os_adapter.dir/src/rtos_al.c.o CMakeFiles/bl6_os_adapter.dir/src/platform_bouffalo_sdk.c.o
-riscv64-unknown-elf-ranlib ../../../../lib/libbl6_os_adapter.a

@@ -1,5 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/rsa_internal.c:62:5:mbedtls_rsa_deduce_primes	128	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/rsa_internal.c:197:5:mbedtls_rsa_deduce_private_exponent	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/rsa_internal.c:243:5:mbedtls_rsa_validate_crt	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/rsa_internal.c:331:5:mbedtls_rsa_validate_params	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/crypto/mbedtls/mbedtls/library/rsa_internal.c:452:5:mbedtls_rsa_deduce_crt	48	static

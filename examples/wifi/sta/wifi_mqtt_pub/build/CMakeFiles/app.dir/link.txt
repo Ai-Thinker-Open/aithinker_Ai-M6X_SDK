@@ -1,2 +1,0 @@
-riscv64-unknown-elf-ar qc build_out/lib/libapp.a "CMakeFiles/app.dir/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/board.c.o" "CMakeFiles/app.dir/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/bsp/board/bl616dk/fw_header.c.o" CMakeFiles/app.dir/wifi_mqtt_pub.c.o
-riscv64-unknown-elf-ranlib build_out/lib/libapp.a

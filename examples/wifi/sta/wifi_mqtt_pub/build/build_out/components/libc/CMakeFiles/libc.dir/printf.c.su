@@ -1,7 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/toolchain/riscv64-unknown-elf/include/stdio.h:221:5:puts	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/libc/printf.c:25:5:putstring	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/toolchain/riscv64-unknown-elf/include/stdio.h:200:5:printf	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/libc/printf.c:85:6:bflb_dump_hex	64	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/libc/printf.c:126:6:bflb_reg_dump	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/libc/printf.c:131:5:bflb_data_compare	16	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/libc/printf.c:144:6:bflb_uart_set_console	0	static

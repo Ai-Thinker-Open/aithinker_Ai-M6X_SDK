@@ -1,2 +1,0 @@
-riscv64-unknown-elf-ar qc ../../lib/libutils.a CMakeFiles/utils.dir/log/log.c.o CMakeFiles/utils.dir/ring_buffer/ring_buffer.c.o CMakeFiles/utils.dir/bflb_block_pool/bflb_block_pool.c.o CMakeFiles/utils.dir/bflb_timestamp/bflb_timestamp.c.o CMakeFiles/utils.dir/getopt/utils_getopt.c.o
-riscv64-unknown-elf-ranlib ../../lib/libutils.a

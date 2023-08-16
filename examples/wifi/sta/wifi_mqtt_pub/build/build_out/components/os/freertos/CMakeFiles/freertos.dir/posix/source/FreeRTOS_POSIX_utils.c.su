@@ -1,9 +1,0 @@
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_utils.c:42:8:UTILS_strnlen	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_utils.c:103:5:UTILS_TimespecToTicks	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_utils.c:163:6:UTILS_NanosecondsToTimespec	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_utils.c:185:5:UTILS_TimespecAdd	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_utils.c:227:5:UTILS_TimespecAddNanoseconds	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_utils.c:268:5:UTILS_TimespecSubtract	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_utils.c:62:5:UTILS_AbsoluteTimespecToDeltaTicks	32	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_utils.c:323:5:UTILS_TimespecCompare	0	static
-/home/seahi/workspace/Ai-M6x/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/components/os/freertos/posix/source/FreeRTOS_POSIX_utils.c:371:6:UTILS_ValidateTimespec	0	static
