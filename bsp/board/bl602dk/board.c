@@ -13,10 +13,10 @@ extern void log_start(void);
 extern uint32_t __HeapBase;
 extern uint32_t __HeapLimit;
 
-static struct bflb_device_s *uart0;
+static struct bflb_device_s* uart0;
 
 #if defined(CONFIG_BFLOG)
-static struct bflb_device_s *rtc;
+static struct bflb_device_s* rtc;
 #endif
 
 static void system_clock_init(void)
@@ -62,7 +62,7 @@ void bl_show_log(void)
 void bl_show_flashinfo(void)
 {
     spi_flash_cfg_type flashCfg;
-    uint8_t *pFlashCfg = NULL;
+    uint8_t* pFlashCfg = NULL;
     uint32_t flashSize = 0;
     uint32_t flashCfgLen = 0;
     uint32_t flashJedecId = 0;
@@ -70,7 +70,7 @@ void bl_show_flashinfo(void)
     flashJedecId = bflb_flash_get_jedec_id();
     flashSize = bflb_flash_get_size();
     bflb_flash_get_cfg(&pFlashCfg, &flashCfgLen);
-    arch_memcpy((void *)&flashCfg, pFlashCfg, flashCfgLen);
+    arch_memcpy((void*)&flashCfg, pFlashCfg, flashCfgLen);
     printf("======== flash cfg ========\r\n");
     printf("flash size 0x%08X\r\n", flashSize);
     printf("jedec id     0x%06X\r\n", flashJedecId);
@@ -89,11 +89,11 @@ void bl_show_flashinfo(void)
     printf("===========================\r\n");
 }
 
-extern void bflb_uart_set_console(struct bflb_device_s *dev);
+extern void bflb_uart_set_console(struct bflb_device_s* dev);
 
 static void console_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     bflb_gpio_uart_init(gpio, GPIO_PIN_16, GPIO_UART_FUNC_UART0_TX);
@@ -130,7 +130,7 @@ void board_init(void)
     console_init();
 
     size_t heap_len = ((size_t)&__HeapLimit - (size_t)&__HeapBase);
-    kmem_init((void *)&__HeapBase, heap_len);
+    kmem_init((void*)&__HeapBase, heap_len);
 
     bl_show_log();
     if (ret != 0) {
@@ -152,7 +152,7 @@ void board_init(void)
 
 void board_uartx_gpio_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     bflb_gpio_uart_init(gpio, GPIO_PIN_1, GPIO_UART_FUNC_UART1_TX);
@@ -194,15 +194,15 @@ void board_pwm_gpio_init()
 
 void board_ir_gpio_init(void)
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     /* IR TX only support GPIO 11 */
-    bflb_gpio_init(gpio, GPIO_PIN_11, GPIO_ANALOG | GPIO_SMT_EN | GPIO_DRV_0);
+    bflb_gpio_init(gpio, GPIO_PIN_13, GPIO_ANALOG | GPIO_SMT_EN | GPIO_DRV_0);
 
     /* IR RX support GPIO 11 ~ GPIO 13 */
-    bflb_gpio_init(gpio, GPIO_PIN_12, GPIO_INPUT | GPIO_SMT_EN | GPIO_DRV_0);
-    GLB_IR_RX_GPIO_Sel(GLB_GPIO_PIN_12);
+    bflb_gpio_init(gpio, GPIO_PIN_11, GPIO_INPUT | GPIO_SMT_EN | GPIO_DRV_0);
+    GLB_IR_RX_GPIO_Sel(GLB_GPIO_PIN_11);
 }
 
 void board_adc_gpio_init()
@@ -237,7 +237,7 @@ __attribute__((weak)) uint32_t bflog_time(void)
     return BFLB_RTC_TIME2SEC(bflb_rtc_get_time(rtc));
 }
 
-__attribute__((weak)) char *bflog_thread(void)
+__attribute__((weak)) char* bflog_thread(void)
 {
     return "";
 }

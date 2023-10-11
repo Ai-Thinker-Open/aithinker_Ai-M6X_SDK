@@ -28,21 +28,21 @@
 #include "gc9503v_dpi.h"
 #include "bflb_mtimer.h"
 #include "bflb_gpio.h"
-
-/* mipi dpi (RGB) paramant */
+#include "bl_mipi_dpi_sim.h"
+ /* mipi dpi (RGB) paramant */
 static lcd_mipi_dpi_init_t dpi_para = {
     .width = GC9503V_DPI_W,  /* LCD Active Width */
     .height = GC9503V_DPI_H, /* LCD Active Height */
-                             /* Total Width = HSW + HBP + Active_Width + HFP */
-    .hsw = 10,               /* LCD HSW (Hsync Pulse Width) */
-    .hbp = 10,               /* LCD HBP (Hsync Back Porch) */
-    .hfp = 10,               /* LCD HFP (Hsync Front Porch) */
-                             /* Total Height = VSW + VBP + Active_Height + VFP */
-    .vsw = 3,                /* LCD VSW (Vsync Pulse Width) */
-    .vbp = 12,               /* LCD VBP (Vsync Back Porch) */
-    .vfp = 14,               /* LCD VFP (Vsync Front Porch) */
+    /* Total Width = HSW + HBP + Active_Width + HFP */
+.hsw = 10,               /* LCD HSW (Hsync Pulse Width) */
+.hbp = 10,               /* LCD HBP (Hsync Back Porch) */
+.hfp = 10,               /* LCD HFP (Hsync Front Porch) */
+/* Total Height = VSW + VBP + Active_Height + VFP */
+.vsw = 3,                /* LCD VSW (Vsync Pulse Width) */
+.vbp = 12,               /* LCD VBP (Vsync Back Porch) */
+.vfp = 14,               /* LCD VFP (Vsync Front Porch) */
 
-    .frame_rate = 60, /* Maximum refresh frame rate per second, Used to automatically calculate the clock frequency */
+.frame_rate = 60, /* Maximum refresh frame rate per second, Used to automatically calculate the clock frequency */
 
 #if (GC9503V_DPI_PIXEL_FORMAT == 1)
     .pixel_format = LCD_MIPI_DPI_PIXEL_FORMAT_RGB565,
@@ -53,7 +53,7 @@ static lcd_mipi_dpi_init_t dpi_para = {
 
 #if (GC9503V_DPI_INIT_INTERFACE == 1)
 
-static struct bflb_device_s *gc9503v_gpio;
+static struct bflb_device_s* gc9503v_gpio;
 
 /* gpio spi init */
 static void gc9503v_soft_spi_init(void)
@@ -78,7 +78,8 @@ static ATTR_TCM_SECTION void spi_send_byte(uint8_t data)
         GC9503V_SPI_CLK_LOW;
         if (data & 0x80) {
             GC9503V_SPI_MOSI_HIGH;
-        } else {
+        }
+        else {
             GC9503V_SPI_MOSI_LOW;
         }
         GC9503V_SPI_CLK_HIGH;
@@ -166,7 +167,7 @@ static const gc9503v_dpi_init_cmd_t gc9503v_dpi_mode_init_cmds[] = {
     { 0xFF, NULL, 30 },  /* delay 30ms */
 };
 
-int ATTR_TCM_SECTION gc9503v_dpi_init(gc9503v_dpi_color_t *screen_buffer)
+int ATTR_TCM_SECTION gc9503v_dpi_init(gc9503v_dpi_color_t* screen_buffer)
 {
 #if (GC9503V_DPI_INIT_INTERFACE == 1)
     /* spi init */
@@ -175,7 +176,8 @@ int ATTR_TCM_SECTION gc9503v_dpi_init(gc9503v_dpi_color_t *screen_buffer)
     for (uint16_t i = 0; i < (sizeof(gc9503v_dpi_mode_init_cmds) / sizeof(gc9503v_dpi_init_cmd_t)); i++) {
         if ((gc9503v_dpi_mode_init_cmds[i].cmd == 0xFF) && (gc9503v_dpi_mode_init_cmds[i].data == NULL) && (gc9503v_dpi_mode_init_cmds[i].databytes)) {
             bflb_mtimer_delay_ms(gc9503v_dpi_mode_init_cmds[i].databytes);
-        } else {
+        }
+        else {
             /* send register address */
             gc9503v_spi_write_cmd(gc9503v_dpi_mode_init_cmds[i].cmd);
             bflb_mtimer_delay_us(22);
@@ -193,25 +195,26 @@ int ATTR_TCM_SECTION gc9503v_dpi_init(gc9503v_dpi_color_t *screen_buffer)
     if (screen_buffer == NULL) {
         return -1;
     }
-    dpi_para.frame_buff = (void *)screen_buffer;
+    dpi_para.frame_buff = (void*)screen_buffer;
     return lcd_mipi_dpi_init(&dpi_para);
 }
 
-int gc9503v_dpi_screen_switch(gc9503v_dpi_color_t *screen_buffer)
+int gc9503v_dpi_screen_switch(gc9503v_dpi_color_t* screen_buffer)
 {
-    return lcd_mipi_dpi_screen_switch((void *)screen_buffer);
+    return lcd_mipi_dpi_screen_switch((void*)screen_buffer);
 }
 
-gc9503v_dpi_color_t *gc9503v_dpi_get_screen_using(void)
+gc9503v_dpi_color_t* gc9503v_dpi_get_screen_using(void)
 {
-    return (gc9503v_dpi_color_t *)lcd_mipi_dpi_get_screen_using();
+    return (gc9503v_dpi_color_t*)lcd_mipi_dpi_get_screen_using();
 }
 
 int gc9503v_dpi_frame_callback_register(uint32_t callback_type, void (*callback)(void))
 {
     if (callback_type == FRAME_INT_TYPE_CYCLE) {
         lcd_mipi_dpi_frame_callback_register(LCD_MIPI_DPI_FRAME_INT_TYPE_CYCLE, callback);
-    } else if (callback_type == FRAME_INT_TYPE_SWAP) {
+    }
+    else if (callback_type == FRAME_INT_TYPE_SWAP) {
         lcd_mipi_dpi_frame_callback_register(LCD_MIPI_DPI_FRAME_INT_TYPE_SWAP, callback);
     }
 

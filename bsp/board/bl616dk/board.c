@@ -24,10 +24,10 @@ extern uint32_t __HeapLimit;
 extern uint32_t __psram_heap_base;
 extern uint32_t __psram_limit;
 
-static struct bflb_device_s *uart0;
+static struct bflb_device_s* uart0;
 
 #if (defined(CONFIG_LUA) || defined(CONFIG_BFLOG) || defined(CONFIG_FATFS))
-static struct bflb_device_s *rtc;
+static struct bflb_device_s* rtc;
 #endif
 
 static void system_clock_init(void)
@@ -86,7 +86,7 @@ static void peripheral_clock_init(void)
 
 static void bflb_init_psram_gpio(void)
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     for (uint8_t i = 0; i < 12; i++) {
@@ -155,13 +155,13 @@ void bl_show_log(void)
 void bl_show_flashinfo(void)
 {
     spi_flash_cfg_type flashCfg;
-    uint8_t *pFlashCfg = NULL;
+    uint8_t* pFlashCfg = NULL;
     uint32_t flashCfgLen = 0;
     uint32_t flashJedecId = 0;
 
     flashJedecId = bflb_flash_get_jedec_id();
     bflb_flash_get_cfg(&pFlashCfg, &flashCfgLen);
-    arch_memcpy((void *)&flashCfg, pFlashCfg, flashCfgLen);
+    arch_memcpy((void*)&flashCfg, pFlashCfg, flashCfgLen);
     printf("=========== flash cfg ==============\r\n");
     printf("jedec id   0x%06X\r\n", flashJedecId);
     printf("mid            0x%02X\r\n", flashCfg.mid);
@@ -179,11 +179,11 @@ void bl_show_flashinfo(void)
     printf("=====================================\r\n");
 }
 
-extern void bflb_uart_set_console(struct bflb_device_s *dev);
+extern void bflb_uart_set_console(struct bflb_device_s* dev);
 
 static void console_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     bflb_gpio_uart_init(gpio, GPIO_PIN_21, GPIO_UART_FUNC_UART0_TX);
@@ -225,11 +225,11 @@ void board_init(void)
     Tzc_Sec_PSRAMB_Access_Release();
 
     heap_len = ((size_t)&__psram_limit - (size_t)&__psram_heap_base);
-    pmem_init((void *)&__psram_heap_base, heap_len);
+    pmem_init((void*)&__psram_heap_base, heap_len);
 #endif
 
     heap_len = ((size_t)&__HeapLimit - (size_t)&__HeapBase);
-    kmem_init((void *)&__HeapBase, heap_len);
+    kmem_init((void*)&__HeapBase, heap_len);
 
     bl_show_log();
     if (ret != 0) {
@@ -259,7 +259,7 @@ void board_init(void)
 
 void board_uartx_gpio_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
 
@@ -271,7 +271,7 @@ void board_uartx_gpio_init()
 
 void board_i2c0_gpio_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     /* I2C0_SDA */
@@ -282,7 +282,7 @@ void board_i2c0_gpio_init()
 
 void board_spi0_gpio_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     /* spi cs */
@@ -297,7 +297,7 @@ void board_spi0_gpio_init()
 
 void board_pwm_gpio_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     bflb_gpio_init(gpio, GPIO_PIN_24, GPIO_FUNC_PWM0 | GPIO_ALTERNATE | GPIO_PULLDOWN | GPIO_SMT_EN | GPIO_DRV_1);
@@ -312,7 +312,7 @@ void board_pwm_gpio_init()
 
 void board_adc_gpio_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     /* ADC_CH0 */
@@ -343,7 +343,7 @@ void board_adc_gpio_init()
 
 void board_dac_gpio_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     /* DAC_CHA */
@@ -354,7 +354,7 @@ void board_dac_gpio_init()
 
 void board_emac_gpio_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     bflb_gpio_init(gpio, GPIO_PIN_25, GPIO_FUNC_EMAC | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
@@ -375,7 +375,7 @@ void board_emac_gpio_init()
 
 void board_sdh_gpio_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     bflb_gpio_init(gpio, GPIO_PIN_10, GPIO_FUNC_SDH | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_2);
@@ -388,7 +388,7 @@ void board_sdh_gpio_init()
 
 void board_ir_gpio_init(void)
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     bflb_gpio_init(gpio, GPIO_PIN_10, GPIO_INPUT | GPIO_SMT_EN | GPIO_DRV_0);
@@ -397,7 +397,7 @@ void board_ir_gpio_init(void)
 
 void board_dvp_gpio_init(void)
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
 
@@ -464,7 +464,7 @@ void board_dvp_gpio_init(void)
 
 void board_i2s_gpio_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
     bflb_gpio_init(gpio, GPIO_PIN_16, GPIO_FUNC_I2S | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
@@ -475,7 +475,7 @@ void board_i2s_gpio_init()
 
 void board_acomp_init()
 {
-    struct bflb_device_s *gpio;
+    struct bflb_device_s* gpio;
 
     gpio = bflb_device_get_by_name("gpio");
 
@@ -510,7 +510,7 @@ __attribute__((weak)) uint32_t bflog_time(void)
     return BFLB_RTC_TIME2SEC(bflb_rtc_get_time(rtc));
 }
 
-__attribute__((weak)) char *bflog_thread(void)
+__attribute__((weak)) char* bflog_thread(void)
 {
     return "";
 }
@@ -522,7 +522,7 @@ __attribute__((weak)) clock_t luaport_clock(void)
     return (clock_t)bflb_mtimer_get_time_us();
 }
 
-__attribute__((weak)) time_t luaport_time(time_t *seconds)
+__attribute__((weak)) time_t luaport_time(time_t* seconds)
 {
     time_t t = (time_t)BFLB_RTC_TIME2SEC(bflb_rtc_get_time(rtc));
     if (seconds != NULL) {
@@ -542,18 +542,18 @@ __attribute__((weak)) uint32_t get_fattime(void)
     bflb_timestamp_utc2time(BFLB_RTC_TIME2SEC(bflb_rtc_get_time(rtc)), &tm);
 
     return ((uint32_t)(tm.year - 1980) << 25) /* Year 2015 */
-           | ((uint32_t)tm.mon << 21)         /* Month 1 */
-           | ((uint32_t)tm.mday << 16)        /* Mday 1 */
-           | ((uint32_t)tm.hour << 11)        /* Hour 0 */
-           | ((uint32_t)tm.min << 5)          /* Min 0 */
-           | ((uint32_t)tm.sec >> 1);         /* Sec 0 */
+        | ((uint32_t)tm.mon << 21)         /* Month 1 */
+        | ((uint32_t)tm.mday << 16)        /* Mday 1 */
+        | ((uint32_t)tm.hour << 11)        /* Hour 0 */
+        | ((uint32_t)tm.min << 5)          /* Min 0 */
+        | ((uint32_t)tm.sec >> 1);         /* Sec 0 */
 }
 #endif
 
 #ifdef CONFIG_SHELL
 #include "shell.h"
 
-static void reboot_cmd(int argc, char **argv)
+static void reboot_cmd(int argc, char** argv)
 {
     GLB_SW_POR_Reset();
 }

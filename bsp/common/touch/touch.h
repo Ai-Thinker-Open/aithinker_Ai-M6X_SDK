@@ -67,6 +67,7 @@ typedef struct
 #define TOUCH_INTERFACE_TYPE           TOUCH_INTERFACE_I2C
 #define TOUCH_MAX_POINT                CST816D_MAX_TOUCH_POINT
 #define _TOUCH_FUNC_DEFINE(_func, ...) cst816d_i2c_##_func(__VA_ARGS__)
+
 #elif defined ENCODER_ENABLE
 
 #else 

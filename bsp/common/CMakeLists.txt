@@ -12,6 +12,10 @@ endif()
 
 # sdh sdcard driver
 if(CONFIG_BSP_SDH_SDCARD)
+    if(CONFIG_BSP_SDH_SDCARD_INT)
+        sdk_add_compile_definitions(-DCONFIG_BSP_SDH_SDCARD_INT)
+    endif()
+
     sdk_add_compile_definitions(-DCONFIG_BSP_SDH_SDCARD)
     target_sources(app PRIVATE sdcard/sdh_sdcard.c)
     sdk_add_include_directories(sdcard)
@@ -28,8 +32,10 @@ if(CONFIG_BSP_LCD)
 
     target_sources(app PRIVATE lcd/mipi_dbi/bl_mipi_dbi.c)
     target_sources(app PRIVATE lcd/mipi_dbi/ili9488_dbi.c)
+    target_sources(app PRIVATE lcd/mipi_dbi/ili9486_dbi.c)
     target_sources(app PRIVATE lcd/mipi_dbi/ili9341_dbi.c)
     target_sources(app PRIVATE lcd/mipi_dbi/nt35510_dbi.c)
+    target_sources(app PRIVATE lcd/mipi_dbi/st7796_dbi.c)
 
     target_sources(app PRIVATE lcd/spi/bl_spi_hard_4.c)
     target_sources(app PRIVATE lcd/spi/ili9341_spi.c)
@@ -37,13 +43,13 @@ if(CONFIG_BSP_LCD)
     target_sources(app PRIVATE lcd/spi/st7796_spi.c)
     target_sources(app PRIVATE lcd/spi/st7796_spi_ai.c)
     target_sources(app PRIVATE lcd/spi/st7789v_spi.c)
-    target_sources(app PRIVATE lcd/spi/ue043hv_spi.c)
     target_sources(app PRIVATE lcd/spi/gc9a01_spi.c)
+    target_sources(app PRIVATE lcd/spi/ue043hv_spi.c)
 
+    target_sources(app PRIVATE lcd/mipi_dpi/bl_mipi_dpi_sim.c)
     target_sources(app PRIVATE lcd/mipi_dpi/standard_dpi.c)
     target_sources(app PRIVATE lcd/mipi_dpi/ili9488_dpi.c)
     target_sources(app PRIVATE lcd/mipi_dpi/gc9503v_dpi.c)
-
     sdk_add_include_directories(lcd)
 endif()
 
@@ -64,5 +70,16 @@ if(CONFIG_BSP_IMAGE_SENSOR)
 
     if(CONFIG_BSP_CSI)
         sdk_add_compile_definitions(-DCONFIG_BSP_CSI)
+    endif()
+endif()
+
+# audio driver
+if(CONFIG_AUDIO)
+    target_sources(app PRIVATE audio/audio.c)
+    sdk_add_include_directories(audio)
+
+    if(CONFIG_BSP_ES8388)
+        target_sources(app PRIVATE audio/i2s_codec/es8388_i2s.c)
+        sdk_add_include_directories(audio/i2s_codec)
     endif()
 endif()
