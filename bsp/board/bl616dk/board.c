@@ -8,7 +8,7 @@
 #include "bl616_tzc_sec.h"
 #include "bl616_psram.h"
 #include "bl616_glb.h"
-
+#include "lwip/dns.h"
 #include "mem.h"
 
 #define WB_4MB_PSRAM (1)
@@ -209,7 +209,7 @@ void board_init(void)
     int ret = -1;
     uintptr_t flag;
     size_t heap_len;
-
+    ip_addr_t dns_addr;
     flag = bflb_irq_save();
 
     ret = bflb_flash_init();
@@ -255,6 +255,9 @@ void board_init(void)
 #endif
 
     bflb_irq_restore(flag);
+    inet_aton("223.5.5.5", &dns_addr.addr);
+    dns_init();
+    dns_setserver(0, &dns_addr);
 }
 
 void board_uartx_gpio_init()
