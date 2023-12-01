@@ -254,10 +254,6 @@ void board_init(void)
     rtc = bflb_device_get_by_name("rtc");
 #endif
 
-    bflb_irq_restore(flag);
-    inet_aton("223.5.5.5", &dns_addr.addr);
-    dns_init();
-    dns_setserver(0, &dns_addr);
 }
 
 void board_uartx_gpio_init()
