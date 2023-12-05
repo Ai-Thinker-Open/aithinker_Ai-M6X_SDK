@@ -21,7 +21,7 @@
  *
  */
 
-/* Includes ------------------------------------------------------------------*/
+ /* Includes ------------------------------------------------------------------*/
 #include "lwip/opt.h"
 #include "lwip/timeouts.h"
 #include "lwip/netif.h"
@@ -73,13 +73,13 @@ uint8_t DHCP_state = DHCP_OFF;
 #define GW_ADDR3      (uint8_t)1
 
 /* Private function prototypes -----------------------------------------------*/
-struct bflb_device_s *emac0;
+struct bflb_device_s* emac0;
 struct bflb_emac_phy_cfg_s phy_cfg = {
     .auto_negotiation = 1, /*!< Speed and mode auto negotiation */
     .full_duplex = 0,      /*!< Duplex mode */
     .speed = 0,            /*!< Speed mode */
 #ifdef PHY_8720
-    .phy_address = 1,  /*!< PHY address */
+    .phy_address = 0,  /*!< PHY address */
     .phy_id = 0x7c0f0, /*!< PHY OUI, masked */
 #else
 #ifdef PHY_8201F
@@ -90,8 +90,8 @@ struct bflb_emac_phy_cfg_s phy_cfg = {
     .phy_state = PHY_STATE_DOWN,
 };
 
-void pbuf_free_custom(struct pbuf *p);
-void ethernetif_input(void *argument);
+void pbuf_free_custom(struct pbuf* p);
+void ethernetif_input(void* argument);
 SemaphoreHandle_t emac_rx_sem = NULL;
 static StackType_t emac_rx_stack[256];
 static StaticTask_t emac_rx_handle;
@@ -114,12 +114,12 @@ LWIP_MEMPOOL_DECLARE(RX_POOL, 10, sizeof(struct pbuf_custom), "Zero-copy RX PBUF
   * @param netif the already initialized lwip network interface structure
   *        for this ethernetif
   */
-extern void emac_init_txrx_buffer(struct bflb_device_s *emac);
+extern void emac_init_txrx_buffer(struct bflb_device_s* emac);
 // extern int ethernet_phy_init(struct bflb_device_s *emac, struct bflb_emac_phy_cfg_s *emac_phy_cfg);
 void emac_rx_done_callback_app(void);
-void dhcp_thread(void const *argument);
+void dhcp_thread(void const* argument);
 
-void emac_isr(int irq, void *arg)
+void emac_isr(int irq, void* arg)
 {
     uint32_t int_sts_val;
     uint32_t index = 0;
@@ -163,7 +163,7 @@ void emac_isr(int irq, void *arg)
     }
 }
 
-void low_level_init(struct netif *netif)
+void low_level_init(struct netif* netif)
 {
     int ret = 0;
     struct bflb_emac_config_s emac_cfg = {
@@ -208,7 +208,8 @@ void low_level_init(struct netif *netif)
     ethernet_phy_status_get();
     if (PHY_STATE_UP == phy_cfg.phy_state) {
         printf("PHY[%lx] @%d ready on %dMbps, %s duplex\n\r", phy_cfg.phy_id, phy_cfg.phy_address, phy_cfg.speed, phy_cfg.full_duplex ? "full" : "half");
-    } else {
+    }
+    else {
         printf("PHY Init fail\n\r");
         while (1) {
             bflb_mtimer_delay_ms(10);
@@ -235,10 +236,10 @@ void low_level_init(struct netif *netif)
 
     /* create the task that handles the ETH_MAC */
     printf("[OS] Starting emac rx task...\r\n");
-    xTaskCreateStatic(ethernetif_input, (char *)"emac_rx_task", sizeof(emac_rx_stack) / 4, netif, osPriorityRealtime, emac_rx_stack, &emac_rx_handle);
+    xTaskCreateStatic(ethernetif_input, (char*)"emac_rx_task", sizeof(emac_rx_stack) / 4, netif, osPriorityRealtime, emac_rx_stack, &emac_rx_handle);
 #if LWIP_DHCP
     printf("[OS] Starting emac dhcp task...\r\n");
-    xTaskCreateStatic(dhcp_thread, (char *)"emac_dhcp_task", sizeof(emac_dhcp_stack) / 4, netif, osPriorityRealtime, emac_dhcp_stack, &emac_dhcp_handle);
+    xTaskCreateStatic(dhcp_thread, (char*)"emac_dhcp_task", sizeof(emac_dhcp_stack) / 4, netif, osPriorityRealtime, emac_dhcp_stack, &emac_dhcp_handle);
 #endif
 
     if (ret == 0) {
@@ -265,10 +266,10 @@ void low_level_init(struct netif *netif)
   */
 
 static unsigned char emac_send_buf[1514];
-static err_t low_level_output(struct netif *netif, struct pbuf *p)
+static err_t low_level_output(struct netif* netif, struct pbuf* p)
 {
     err_t errval = ERR_OK;
-    struct pbuf *q;
+    struct pbuf* q;
 
     if (!emac_bd_fragment_support()) {
         uint32_t byteslefttocopy = 0;
@@ -301,7 +302,8 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
             return ERR_IF;
         }
 
-    } else {
+    }
+    else {
         for (q = p; q != NULL; q = q->next) {
             // printf("p->tot_len:%d,q->len:%d, q->next:%d\r\n", q->tot_len, q->len, q->next);
             if (q->len == q->tot_len) {
@@ -309,12 +311,14 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
                     printf("emac_bd_tx_enqueue error!\r\n");
                     return ERR_IF;
                 }
-            } else if (q->len < q->tot_len) {
+            }
+            else if (q->len < q->tot_len) {
                 if (0 != bflb_emac_bd_tx_enqueue(EMAC_FRAGMENT_PACKET, q->len, q->payload)) {
                     printf("emac_bd_tx_enqueue error!\r\n");
                     return ERR_IF;
                 }
-            } else {
+            }
+            else {
                 printf("low_level_output error! Wrong packet!\r\n");
             }
         }
@@ -331,10 +335,10 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
   * @return a pbuf filled with the received packet (including MAC header)
   *         NULL on memory error
   */
-static struct pbuf *low_level_input(struct netif *netif)
+static struct pbuf* low_level_input(struct netif* netif)
 {
     uint32_t rx_len = 0;
-    struct pbuf *p = NULL, *q;
+    struct pbuf* p = NULL, * q;
 
     bflb_emac_bd_rx_dequeue(-1, &rx_len, emac_rx_buffer);
 
@@ -380,10 +384,10 @@ void emac_rx_done_callback_app(void)
   *
   * @param netif the lwip network interface structure for this ethernetif
   */
-void ethernetif_input(void *argument)
+void ethernetif_input(void* argument)
 {
-    struct pbuf *p = NULL;
-    struct netif *netif = (struct netif *)argument;
+    struct pbuf* p = NULL;
+    struct netif* netif = (struct netif*)argument;
 
     for (;;) {
         if (xSemaphoreTake(emac_rx_sem, portMAX_DELAY) == pdTRUE) {
@@ -413,7 +417,7 @@ void ethernetif_input(void *argument)
   *         ERR_MEM if private data couldn't be allocated
   *         any other err_t on error
   */
-err_t ethernetif_init(struct netif *netif)
+err_t ethernetif_init(struct netif* netif)
 {
     LWIP_ASSERT("netif != NULL", (netif != NULL));
 
@@ -442,13 +446,13 @@ err_t ethernetif_init(struct netif *netif)
   * @param  pbuf: pbuf to be freed
   * @retval None
   */
-void pbuf_free_custom(struct pbuf *p)
+void pbuf_free_custom(struct pbuf* p)
 {
-    struct pbuf_custom *custom_pbuf = (struct pbuf_custom *)p;
+    struct pbuf_custom* custom_pbuf = (struct pbuf_custom*)p;
     LWIP_MEMPOOL_FREE(RX_POOL, custom_pbuf);
 }
 
-static void ethernet_set_static_ip(struct netif *netif)
+static void ethernet_set_static_ip(struct netif* netif)
 {
     ip_addr_t ipaddr;
     ip_addr_t netmask;
@@ -465,7 +469,7 @@ static void ethernet_set_static_ip(struct netif *netif)
   * @param  netif: the network interface
   * @retval None
   */
-void ethernet_link_status_updated(struct netif *netif)
+void ethernet_link_status_updated(struct netif* netif)
 {
     if (netif_is_link_up(netif)) {
 #if LWIP_DHCP
@@ -476,10 +480,11 @@ void ethernet_link_status_updated(struct netif *netif)
         /* IP address default setting */
         ethernet_set_static_ip(netif);
         uint8_t iptxt[20];
-        sprintf((char *)iptxt, "%s", ip4addr_ntoa(netif_ip4_addr(netif)));
+        sprintf((char*)iptxt, "%s", ip4addr_ntoa(netif_ip4_addr(netif)));
         printf("Static IP address: %s\r\n", iptxt);
 #endif
-    } else {
+    }
+    else {
 #if LWIP_DHCP
         /* Update DHCP state machine */
         DHCP_state = DHCP_LINK_DOWN;
@@ -493,7 +498,7 @@ void ethernet_link_status_updated(struct netif *netif)
   * @brief
   * @retval None
   */
-void ethernet_link_check_state(struct netif *netif)
+void ethernet_link_check_state(struct netif* netif)
 {
     emac_phy_status_t phy_state;
 
@@ -507,10 +512,12 @@ void ethernet_link_check_state(struct netif *netif)
         bflb_emac_stop(emac0);
         netif_set_down(netif);
         netif_set_link_down(netif);
-    } else if (!netif_is_link_up(netif) && (phy_state <= EMAC_PHY_STAT_LINK_DOWN)) {
+    }
+    else if (!netif_is_link_up(netif) && (phy_state <= EMAC_PHY_STAT_LINK_DOWN)) {
         printf("Reinit\r\n");
         ethernet_phy_init(emac0, &phy_cfg);
-    } else if (!netif_is_link_up(netif) && (phy_state > EMAC_PHY_STAT_LINK_UP)) {
+    }
+    else if (!netif_is_link_up(netif) && (phy_state > EMAC_PHY_STAT_LINK_UP)) {
         // switch (phy_state) {
         //     case EMAC_PHY_STAT_100MBITS_FULLDUPLEX:
         //         duplex = 1;
@@ -554,13 +561,13 @@ void ethernet_link_check_state(struct netif *netif)
   * @param  argument: network interface
   * @retval None
   */
-void dhcp_thread(void const *argument)
+void dhcp_thread(void const* argument)
 {
-    struct netif *netif = (struct netif *)argument;
+    struct netif* netif = (struct netif*)argument;
     ip_addr_t ipaddr;
     ip_addr_t netmask;
     ip_addr_t gw;
-    struct dhcp *dhcp;
+    struct dhcp* dhcp;
     uint8_t iptxt[20];
 
     for (;;) {
@@ -576,10 +583,11 @@ void dhcp_thread(void const *argument)
             case DHCP_WAIT_ADDRESS: {
                 if (dhcp_supplied_address(netif)) {
                     DHCP_state = DHCP_ADDRESS_ASSIGNED;
-                    sprintf((char *)iptxt, "%s", ip4addr_ntoa(netif_ip4_addr(netif)));
+                    sprintf((char*)iptxt, "%s", ip4addr_ntoa(netif_ip4_addr(netif)));
                     printf("IP address assigned by a DHCP server: %s\r\n", iptxt);
-                } else {
-                    dhcp = (struct dhcp *)netif_get_client_data(netif, LWIP_NETIF_CLIENT_DATA_INDEX_DHCP);
+                }
+                else {
+                    dhcp = (struct dhcp*)netif_get_client_data(netif, LWIP_NETIF_CLIENT_DATA_INDEX_DHCP);
                     // printf("else\r\n");
                     /* DHCP timeout */
                     if (dhcp->tries > MAX_DHCP_TRIES) {
@@ -587,7 +595,7 @@ void dhcp_thread(void const *argument)
 
                         /* Static address used */
                         ethernet_set_static_ip(netif);
-                        sprintf((char *)iptxt, "%s", ip4addr_ntoa(netif_ip4_addr(netif)));
+                        sprintf((char*)iptxt, "%s", ip4addr_ntoa(netif_ip4_addr(netif)));
                         printf("DHCP Timeout !! \r\n");
                         printf("Static IP address: %s\r\n", iptxt);
                     }
