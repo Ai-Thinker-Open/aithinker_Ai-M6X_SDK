@@ -8,7 +8,7 @@
 #include "bl616_tzc_sec.h"
 #include "bl616_psram.h"
 #include "bl616_glb.h"
-#include "lwip/dns.h"
+
 #include "mem.h"
 
 #define WB_4MB_PSRAM (1)
