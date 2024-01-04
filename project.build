@@ -72,9 +72,7 @@ build:Makefile
 	$(CMAKE) -S . -B build -G $(cmake_generator) $(cmake_definition)
 	make -C build -j8
 	make -C build combine
-	cp $(BL_SDK_BASE)/bsp/board/bl616dk/config/edata.bin build/build_out
-	cp $(BL_SDK_BASE)/bsp/board/bl616dk/config/Rx_boot2_m61.bin build/build_out
-
+	
 ninja:Makefile
 	$(CMAKE) -S . -B build -G Ninja $(cmake_definition)
 	cd build && ninja && ninja combine
